@@ -1,0 +1,236 @@
+<div class="fb-posts__content subcomment-content">
+    <!-- --- start post item ----- -->
+    <div class="fb-posts__post">
+        <div class="fb-posts__post-votes" (click)="dataCommentService.onUpvote(dataCommentService.clickedComment._id)">
+            <i class="bi bi-caret-up-fill"></i>
+            <span class="votes-count">{{dataCommentService.clickedComment.votes.length}}</span>
+        </div>
+        <div class="fb-posts__post-link inactive">
+            <div class="fb-posts__post-body">
+                <h4 class="fb-posts__post-title">{{dataCommentService.clickedComment.title}}</h4>
+                <p 
+                    class="fb-posts__post-type selected-comment">
+                    {{statusTypes[dataCommentService.clickedComment.status-1]}}
+                </p>
+                <p 
+                    *ngIf="!viewFullLetter"
+                    class="fb-posts__post-details selected-comment">
+                    {{ (dataCommentService.clickedComment.details.length>400)? (dataCommentService.clickedComment.details | slice:0:400)+'...':(dataCommentService.clickedComment.details) }}
+                </p>                        
+                <p 
+                    *ngIf="viewFullLetter"
+                    class="fb-posts__post-details">
+                    {{dataCommentService.clickedComment.details}}
+                </p>
+                <div *ngIf="viewFullLetter && dataCommentService.clickedComment.file.length !== 0">
+                    <div *ngFor="let filename of dataCommentService.clickedComment.file" class = "fb-posts__post-container">
+                        <img class="fb-posts__post-postImages" id = "{{filename}}" src="{{filepath}}{{filename}}" alt="{{filename}}" (click)="onPopUpImage(filename)">
+                    </div>
+                </div>
+                <!-- start choose full letter -->
+                <p 
+                    *ngIf="dataCommentService.clickedComment.details.length > 400 && !viewFullLetter || dataCommentService.clickedComment.file.length !== 0 && !viewFullLetter "
+                    class="letter-more" (click)="onViewFullLetter()">
+                    more
+                </p>
+                <p 
+                    *ngIf="dataCommentService.clickedComment.details.length > 400 && viewFullLetter || dataCommentService.clickedComment.file.length !== 0 && viewFullLetter"
+                    class="letter-more" (click)="onViewSummaryLetter()">
+                    less
+                </p>
+                <!-- end choose full letter -->
+            </div>
+            <div class="fb-posts__post-comments">
+                <i class="bi bi-chat-left-text"></i>
+                <span class="comments-counter">{{dataCommentService.clickedComment.comments.length}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="fb-posts__post-autor">
+        <!-- <div><img class = "fb-posts__user-avatar" src="assets/manga_1.jpg"></div> -->
+        <div class = "fb-posts__user-avatar avatar_letter_center">{{dataCommentService.clickedComment.user_name.slice(0,2)}}</div>
+        <div class="fb-posts__user-name ">{{dataCommentService.clickedComment.user_name}}</div>
+    </div>
+
+    <div class="fb-posts__post-time">{{dataCommentService.clickedComment.updated_at.slice(0,10)}}</div>
+    <!-- --- end post item ----- -->
+    <app-createform 
+        [id] = "dataCommentService.clickedComment._id" 
+        [feedbackId] = "dataCommentService.clickedComment._id"
+        [uniqueId] = "dataCommentService.clickedComment._id"
+        [type] = "'createComment'">
+    </app-createform>
+
+    <div class="fb-posts__subcomment-control-buttons">
+        <span>Activity</span>
+        <button class="fb-sort-newest" type="button" (click)="chooseSubcommentSort('newest')"
+            [ngClass]="{'activeSort': activeSortSubcommentBtn === 'newest'}">Newest</button>
+        <button class="fb-sort-oldest" type="button" (click)="chooseSubcommentSort('oldest')"
+            [ngClass]="{'activeSort': activeSortSubcommentBtn === 'oldest'}">Oldest</button>
+    </div>
+
+    <!--start comment part -->
+    <div class="fb-posts__subcomment-container">
+        <div *ngFor="let item of dataCommentService.commentsByFeedback">
+            <div 
+                class="fb-posts__subcomment-item"
+                style="margin-bottom: 15px;"
+                [ngClass]="{'admin-answer': item.user_role === 1}">
+                <div 
+                    *ngIf="item.user_role === 1" 
+                    class="fb-posts__subcomment-admin-title"
+                    >Admin answer:
+                </div>
+                <div class="fb-posts__post-autor">
+                    <div class="fb-posts__user-avatar avatar_letter_center">
+                        <span>{{item.user_name.slice(0,2)}}</span>
+                        <div 
+                            *ngIf="item.user_role === 1" 
+                            class="fb-posts__user-avatar--admin">
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                    </div>
+                    <div class="fb-posts__user-name">{{item.user_name}}</div>
+                </div>
+                <div class="fb-posts__subcomment-message">{{item.comment}}</div>
+                <div class="fb-posts__subcomment-imageContainer" *ngFor="let filename of item.file">
+                    <img 
+                        class="fb-posts__subcomment-commentImages"
+                        id = "{{filename}}" 
+                        src="{{filepath}}{{filename}}" 
+                        alt="{{filename}}" 
+                        (click)="onPopUpImage(filename)">
+                </div>
+                <div class="fb-posts__post-time">
+                    <span>{{item.updated_at.slice(0,10)}}</span>
+                    <span class="commentMenu" (click)="onViewForm(item._id, 'createComForm')" >Reply</span>
+                    <span
+                        *ngIf="role === '1' || role === '0' && item.user_id === userId"
+                        class="commentMenu" 
+                        (click)="onViewForm(item._id, 'updateComForm')">
+                        Edit
+                    </span>
+                    <span
+                        *ngIf="role === '1' || role === '0' && item.user_id === userId" 
+                        class="commentMenu" 
+                        (click)="deleteFeedbackComment(mymodal, item._id, item.user_name)">
+                        Delete
+                    </span>
+                </div>
+            </div>
+            <app-createform
+                style="display: none;"
+                [id] = "item._id + '1'"
+                [feedbackId] = "dataCommentService.clickedComment._id"
+                [targetId] = "item._id"
+                [uniqueId] = "item._id"
+                [type] = "'createSubCom'">
+            </app-createform>
+            <app-updateform 
+                style="display: none"
+                [id] = "item._id + '2'" 
+                [targetId] = "item._id"
+                [uniqueId] = "item._id" 
+                [comment] = "item.comment" 
+                [type] = "'updateComment'">
+            </app-updateform>
+            <!--start sub cmment part -->
+            <div 
+                class="subcomment" 
+                *ngFor="let subcomment of item.sub_comments">
+                <div 
+                    class="fb-posts__subcomment-item" 
+                    style="margin-bottom: 15px;"
+                    [ngClass]="{'admin-answer': subcomment.user_role === 1}">
+                    <div 
+                        *ngIf="subcomment.user_role === 1" 
+                        class="fb-posts__subcomment-admin-title"
+                        >Admin answer:
+                    </div>
+                    <div class="fb-posts__post-autor">
+                        <div class="fb-posts__user-avatar avatar_letter_center">
+                            <span>{{subcomment.user_name.slice(0,2)}}</span>
+                            <div 
+                                *ngIf="subcomment.user_role === 1" 
+                                class="fb-posts__user-avatar--admin">
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                        <div class="fb-posts__user-name">{{subcomment.user_name}}</div>
+                    </div>
+                    <div class="fb-posts__subcomment-message">{{subcomment.content}}</div>
+                    <div 
+                        class="fb-posts__subcomment-imageContainer"
+                        *ngFor="let filename of subcomment.file">
+                        <img 
+                            class="fb-posts__subcomment-commentImages"
+                            id = "{{filename}}"
+                            src="{{filepath}}{{filename}}"
+                            alt="{{filename}}"  
+                            (click)="onPopUpImage(filename)">
+                    </div>
+                    <div class="fb-posts__post-time">
+                        <span>{{subcomment.updated_at.slice(0,10)}}</span>
+                        <span class="commentMenu" (click)="onViewForm(subcomment._id, 'createComForm')" >Reply</span>
+                        <span
+                            *ngIf="role === '1' || role === '0' && userId === subcomment.user_id" 
+                            class="commentMenu" 
+                            (click)="onViewForm(subcomment._id, 'updateComForm')" >
+                            Edit
+                        </span>
+                        <span
+                            *ngIf="role === '1' || role === '0' && userId === subcomment.user_id"
+                            class="commentMenu" 
+                            (click)="deleteFeedbackSubComment(mymodal, subcomment._id, subcomment.user_name)">
+                            Delete
+                        </span>
+                    </div>
+                </div>
+                <app-createform
+                    style="display: none;"
+                    [id] = "subcomment._id + '1'"
+                    [feedbackId] = "dataCommentService.clickedComment._id" 
+                    [targetId] = "item._id"
+                    [uniqueId] = "subcomment._id"
+                    [type] = "'createSubCom'">
+                </app-createform>
+                <app-updateform
+                    style="display: none"
+                    [id] = "subcomment._id + '2'" 
+                    [targetId] = "subcomment._id"
+                    [uniqueId] = "subcomment._id" 
+                    [comment] = "subcomment.content" 
+                    [type] = "'updateComment'">
+                </app-updateform>
+            </div>
+            <!--end sub cmment part -->
+        </div>
+    </div>
+    <!-- end comment part -->
+    
+    <!-- start delete modal -->
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title"><i class="fas fa-exclamation-triangle"></i> Are you sure?</h4>
+          <button type="button" style="outline: none;" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h6>{{username}}</h6>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">OK</button>
+        </div>
+    </ng-template>
+    <!-- end delete modal -->
+
+    <!-- start pop up image modal -->
+    <div id="myModal" class="modal" (click)="onCloseImage()">
+        <span class="imageClose" >&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+    <!-- end pop up image modal -->
+
+</div>

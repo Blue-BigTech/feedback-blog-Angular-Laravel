@@ -1,0 +1,142 @@
+.inv-border {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Shadows */
+.inv-shadow-sm { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
+.inv-shadow { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.inv-shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+/* Margins */
+.inv-m-1 { margin: 0.5rem; }
+.inv-m-2 { margin: 1rem; }
+.inv-m-3 { margin: 1.5rem; }
+.inv-m-4 { margin: 2rem; }
+.inv-m-5 { margin: 5rem; }
+
+.inv-m-auto { margin: auto; }
+.inv-mx-auto { margin-left: auto; margin-right: auto; }
+.inv-my-auto { margin-top: auto; margin-bottom: auto; }
+.inv-ml-auto { margin-left: auto; }
+.inv-mr-auto { margin-right: auto !important; }
+.inv-mt-auto { margin-top: auto; }
+.inv-mb-auto { margin-bottom: auto; }
+
+.inv-mt-1 { margin-top: 0.5rem; }
+.inv-mt-2 { margin-top: 1rem; }
+.inv-mt-3 { margin-top: 1.5rem; }
+.inv-mt-4 { margin-top: 2rem; }
+.inv-mt-5 { margin-top: 5rem; }
+
+.inv-mb-1 { margin-bottom: 0.5rem; }
+.inv-mb-2 { margin-bottom: 1rem; }
+.inv-mb-3 { margin-bottom: 1.5rem; }
+.inv-mb-4 { margin-bottom: 2rem; }
+.inv-mb-5 { margin-bottom: 5rem; }
+
+.inv-ml-1 { margin-left: 0.5rem; }
+.inv-ml-2 { margin-left: 1rem; }
+.inv-ml-3 { margin-left: 1.5rem; }
+.inv-ml-4 { margin-left: 2rem; }
+.inv-ml-5 { margin-left: 5rem; }
+
+.inv-mr-1 { margin-right: 0.5rem; }
+.inv-mr-2 { margin-right: 1rem; }
+.inv-mr-3 { margin-right: 1.5rem; }
+.inv-mr-4 { margin-right: 2rem; }
+.inv-mr-5 { margin-right: 5rem; }
+
+.inv-my-1 {margin-top: 0.5rem; margin-bottom: 0.5rem;}
+.inv-my-2 {margin-top: 1rem; margin-bottom: 1rem;}
+.inv-my-3 {margin-top: 1.5rem; margin-bottom: 1.5rem;}
+.inv-my-4 {margin-top: 2rem; margin-bottom: 2rem;}
+.inv-my-5 {margin-top: 5rem; margin-bottom: 5rem;}
+
+
+/* Paddings */
+.inv-p-1 { padding: 0.5rem; }
+.inv-p-2 { padding: 1rem; }
+.inv-p-3 { padding: 1.5rem; }
+.inv-p-4 { padding: 2rem; }
+.inv-p-5 { padding: 5rem; }
+
+.inv-p-auto { padding: auto; }
+.inv-px-auto { padding-left: auto; margin-right: auto; }
+.inv-py-auto { padding-top: auto; margin-bottom: auto; }
+.inv-pl-auto { padding-left: auto; }
+.inv-pr-auto { padding-right: auto !important; }
+.inv-pt-auto { padding-top: auto; }
+.inv-pb-auto { padding-bottom: auto; }
+
+.inv-pt-1 { padding-top: 0.5rem; }
+.inv-pt-2 { padding-top: 1rem; }
+.inv-pt-3 { padding-top: 1.5rem; }
+.inv-pt-4 { padding-top: 2rem; }
+.inv-pt-5 { padding-top: 5rem; }
+
+.inv-pb-1 { padding-bottom: 0.5rem; }
+.inv-pb-2 { padding-bottom: 1rem; }
+.inv-pb-3 { padding-bottom: 1.5rem; }
+.inv-pb-4 { padding-bottom: 2rem; }
+.inv-pb-5 { padding-bottom: 5rem; }
+
+.inv-pl-1 { padding-left: 0.5rem; }
+.inv-pl-2 { padding-left: 1rem; }
+.inv-pl-3 { padding-left: 1.5rem; }
+.inv-pl-4 { padding-left: 2rem; }
+.inv-pl-5 { padding-left: 5rem; }
+
+.inv-pr-1 { padding-right: 0.5rem; }
+.inv-pr-2 { padding-right: 1rem; }
+.inv-pr-3 { padding-right: 1.5rem; }
+.inv-pr-4 { padding-right: 2rem; }
+.inv-pr-5 { padding-right: 5rem; }
+
+
+/* Alignments */
+
+.inv-text-center {
+  text-align: center;
+}
+
+/* Titles */
+.inv-card-title-sm {font-size: 16px;font-weight: 300;letter-spacing: -0.5px;}
+.inv-card-title {font-size: 20px;font-weight: 300;letter-spacing: -0.5px;}
+.inv-card-title-md {font-size: 24px;font-weight: 300;letter-spacing: -0.5px;}
+
+.inv-form-label {font-size: 13px; font-weight: normal; letter-spacing: 1px; color: #555;}
+
+.inv-parag {font-size: 14px;font-weight: 400;letter-spacing: 1px;}
+.inv-text-sm {font-size: 13px;font-weight: 400;letter-spacing: 1px;}
+
+/* Links */
+.inv-text-link {
+  color: #0063d4;
+  text-decoration: none;
+}
+
+.inv-jc-between {
+  justify-content: space-between !important;
+}
+.inv-d-flex {
+  display: flex;
+}
+
+
+/* Columns - width */
+
+.inv-col-1 { width: 10%; }
+.inv-col-2 { width: 20%; }
+.inv-col-3 { width: 30%; }
+.inv-col-4 { width: 40%; }
+.inv-col-5 { width: 50%; }
+.inv-col-6 { width: 60%; }
+.inv-col-7 { width: 70%; }
+.inv-col-8 { width: 80%; }
+.inv-col-9 { width: 90%; }
+.inv-col-10 { width: 100%; }
+
+.cursor-pointer {
+  cursor: pointer !important;
+}

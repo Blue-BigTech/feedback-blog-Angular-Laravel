@@ -1,0 +1,55 @@
+.features-container {
+  position: relative;
+  background-color: transparent;
+  height: 100%;
+  .features-list{
+    min-width: 260px;
+    max-width: 260px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #ffffff10;
+    .card-title {
+      font-weight: 500 !important;
+    }
+    .feature-item {
+      width: calc(100% - 2px);
+      margin-left: 2px;
+      height: 70px;
+      background: transparent;
+      margin-bottom: 5px;
+      padding: 5px 10px;
+      transition: 0.5s;
+      border-left: 5px solid #efefef;
+      position: relative;
+      cursor: pointer;
+      .card-title {
+        font-weight: 500;
+      }
+      &:hover {
+        background: transparent;
+        border-left: 5px solid #051e34;
+      }
+      .switch {
+        top: 0;
+        right: 0;
+        margin: 10px 15px;
+        position: absolute;
+      }
+    }
+  }
+  .feature-details {
+    width: calc(100% - 260px);
+    background: transparent;
+    padding: 12px;
+    .card-title {
+      font-weight: 500;
+    }
+  }
+}
+
+.activeFeature {
+  border-left: 5px solid #051e34 !important;
+  background: #ffffff11 !important;
+}
+

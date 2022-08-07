@@ -1,0 +1,115 @@
+<div class="pw__wrapper" style="z-index: 20 !important;" [ngClass]="{'is-visible': popupsService.visibleProfileWindow}">
+    <div class="pw__left-side">
+        <div class="pw__left-side-content" [ngClass]="{'is-visible': popupsService.visibleProfileWindow}">
+
+            <div class="profile-user-box">
+                <div class="profile-user-avatar">
+                  <img src="{{filepath}}profileAvatars/{{user.avatar}}" class="avatar" alt="">
+                </div>
+                <div>
+                    <h2 class="profile-user-name">{{user.fname}} {{user.lname}}</h2>
+                    <div class="profile-user-desc">Your personal account</div>
+                </div>
+            </div>
+
+            <div class="pw__divider"> <img src="{{filepath}}profileAvatars/{{user.avatar}}"></div>
+
+            <h2 class="pw__title">User</h2>
+            <ul class="pw__nav-list">
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="profileService.openProfileTab('my account')"
+                        [ngClass]="{'activeLink': profileService.activeProfileTab === 'my account'}">
+                        My Account
+                    </a>
+                </li>
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="profileService.openProfileTab('public profile')"
+                        [ngClass]="{'activeLink': profileService.activeProfileTab === 'public profile'}">
+                        Public Profile
+                    </a>
+                </li>
+            </ul>
+
+            <div class="pw__divider"></div>
+
+            <h2 class="pw__title">Billing</h2>
+            <ul class="pw__nav-list">
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="profileService.openProfileTab('manage plan')"
+                        [ngClass]="{'activeLink': profileService.activeProfileTab === 'manage plan'}">
+                        Manage Plan
+                    </a>
+                </li>
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="profileService.openProfileTab('payment history')"
+                        [ngClass]="{'activeLink': profileService.activeProfileTab === 'payment history'}">
+                        Payment History
+                    </a>
+                </li>
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="profileService.openProfileTab('payment method')"
+                        [ngClass]="{'activeLink': profileService.activeProfileTab === 'payment method'}">
+                        Payment Method
+                    </a>
+                </li>
+            </ul>
+
+            <div class="pw__divider"></div>
+
+            <h2 class="pw__title">App Settings</h2>
+            <ul class="pw__nav-list">
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="profileService.openProfileTab('appearance')"
+                        [ngClass]="{'activeLink': profileService.activeProfileTab === 'appearance'}">
+                        Appearance
+                    </a>
+                </li>
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="profileService.openProfileTab('notifications')"
+                        [ngClass]="{'activeLink': profileService.activeProfileTab === 'notifications'}">
+                        Notifications
+                    </a>
+                </li>
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="profileService.openProfileTab('keybinds')"
+                        [ngClass]="{'activeLink': profileService.activeProfileTab === 'keybinds'}">
+                        Keybinds
+                    </a>
+                </li>
+            </ul>
+
+            <div class="pw__divider"></div>
+
+            <ul class="pw__nav-list">
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link right-icon" (click)="logout()">
+                        <span>Sign Out</span>
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="pw__right-side">
+        <div class="pw__right-side-content" [ngClass]="{'is-visible': popupsService.visibleProfileWindow}">
+            <h2 class="pw__subtitle">{{profileService.activeProfileTab}}</h2>
+
+            <app-theme-switcher *ngIf="profileService.activeProfileTab === 'appearance'"></app-theme-switcher>
+            <app-my-profile *ngIf="profileService.activeProfileTab === 'my account'"></app-my-profile>
+            <app-public-profile *ngIf="profileService.activeProfileTab === 'public profile'"></app-public-profile>
+            <app-payment-history *ngIf="profileService.activeProfileTab === 'payment history'"></app-payment-history>
+            <app-payment-method *ngIf="profileService.activeProfileTab === 'payment method'"></app-payment-method>
+
+
+            <app-plans-billings *ngIf="profileService.activeProfileTab === 'manage plan'"></app-plans-billings>
+
+        </div>
+        <button class="pw__close-btn" [ngClass]="{'is-visible': popupsService.visibleProfileWindow}"
+            (click)="popupsService.visibleProfileWindow = false">
+            <svg width="18" height="18">
+                <use href="assets/img/sprite.svg#close-cross"></use>
+            </svg>
+        </button>
+    </div>
+</div>

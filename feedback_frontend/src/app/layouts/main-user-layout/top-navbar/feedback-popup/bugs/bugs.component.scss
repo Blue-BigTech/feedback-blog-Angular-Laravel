@@ -1,0 +1,102 @@
+.drop-down-wrapper {
+  width: 10%;
+  // margin: 8px;
+  // min-width: 280px;
+  .overlayOutlet{
+      padding: 10px;
+      cursor: pointer;
+      font-size: 13px;
+  }
+}
+
+.drop-drown-button {
+  border-radius: 50px;
+  padding: 2px 5px;
+  background-color: #1e1e1e;
+  color: white;
+  border: none;
+}
+
+.padding {
+  padding: 2px;
+  font-size: 1.125em;
+}
+
+.drop-drown-button :hover {
+  border-radius: 50px;
+  background-color: #333333;
+}
+
+.letter-more {
+  color: #14a800;
+  text-decoration: underline;
+}
+
+.margin-b15{
+  margin-bottom: 15px;
+}
+
+.three-dot-icon {
+  background-color: #333333;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.three-dot-icon:hover {
+  background-color: rgb(191, 175, 163);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.notify-select-content {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.notify-select-content:hover {
+  background-color: #334230;
+  padding:5px;
+  cursor: pointer;
+}
+
+.badge-notification {
+  position: absolute;
+  font-size: .6rem;
+  margin-top: -1.2rem;
+  margin-left: 1rem;
+  padding: 0.2em 0.45em;
+}
+
+.font-w700 {
+  font-weight:700;
+}
+
+.font-cC{
+  color: chartreuse;
+}
+
+.font-S14{
+  font-size: 14px;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 5px grey;
+  background: #1d1d1d; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: grey; 
+}

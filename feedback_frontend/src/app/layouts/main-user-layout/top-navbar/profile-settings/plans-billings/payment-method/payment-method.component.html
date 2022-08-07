@@ -1,0 +1,226 @@
+<!-- Payment Information -->
+<div class="payment-information-wrapper" *ngIf="paymentInformation">
+    <h3 class="billings__title">
+        <!-- <a class="return-link" (click)="return()">Manage Current Plan</a> -->
+        <!-- <a class="return-arrow" (click)="return()">
+            <i class="bi bi-arrow-left"></i>
+        </a> -->
+        <span>Payment Information</span>
+    </h3>
+    <!-- <div class="billings__box"> -->
+    <div class="billings__inner-card">
+        <button class="billings__plan-btn edit-info-btn" type="button" *ngIf="!billingInformationForm"
+            (click)="editBillingInfo()">Edit</button>
+
+        <h4 class="billings__inner-card-title">Billing Information</h4>
+        <div class="billings__user-data" *ngIf="!billingInformationForm">
+            <div class="billings__form-label">
+                <span>User Name</span>
+            </div>
+            Lorem, ipsum dolor sit amet consectetur adipisicing.
+        </div>
+        <form name="billing-info" class="billings__inner-form" *ngIf="billingInformationForm">
+            <div class="billings__form-field-wrapper df">
+                <div class="billings__form-field">
+                    <div class="billings__form-label">
+                        <span>First name</span>
+                        <sup><i class="bi bi-asterisk"></i></sup>
+                    </div>
+                    <input type="text" class="billings__form-input">
+                </div>
+                <div class="billings__form-field">
+                    <div class="billings__form-label">
+                        <span>Last name</span>
+                        <sup><i class="bi bi-asterisk"></i></sup>
+                    </div>
+                    <input type="text" class="billings__form-input">
+                </div>
+            </div>
+
+            <div class="billings__form-field-wrapper">
+                <div class="billings__form-field">
+                    <div class="billings__form-label">
+                        <span>Address (P.O. box, company name, c/o)</span>
+                        <sup><i class="bi bi-asterisk"></i></sup>
+                    </div>
+                    <input type="text" class="billings__form-input">
+                </div>
+            </div>
+
+            <div class="billings__form-field-wrapper">
+                <div class="billings__form-field">
+                    <div class="billings__form-label">
+                        <span>Address line 2 (Apartment, suite, unit)</span>
+                    </div>
+                    <input type="text" class="billings__form-input">
+                </div>
+            </div>
+
+            <div class="billings__form-field-wrapper df">
+                <div class="billings__form-field">
+                    <div class="billings__form-label">
+                        <span>City</span>
+                        <sup><i class="bi bi-asterisk"></i></sup>
+                    </div>
+                    <input type="text" class="billings__form-input">
+                </div>
+                <div class="billings__form-field">
+                    <div class="billings__form-label">
+                        <span>Postal/Zip code</span>
+                    </div>
+                    <input type="text" class="billings__form-input">
+                </div>
+            </div>
+
+            <div class="billings__form-field-wrapper df">
+                <div class="billings__form-field">
+                    <div class="billings__form-label">
+                        <span>Country/Region</span>
+                        <sup><i class="bi bi-asterisk"></i></sup>
+                    </div>
+                    <!-- <input type="text" class="billings__form-input"> -->
+
+                    <!-- select ----- -->
+                    <div class="billings__form-select-wrapper">
+                        <span class="select-arrow-pointer">
+                            <!-- <i class="bi bi-chevron-down"></i> -->
+                            <i class="bi bi-caret-up-fill"></i>
+                            <i class="bi bi-caret-down-fill"></i>
+                        </span>
+
+                        <button class="billings__form-select-btn" type="button" id="dropdownSplitOptions"
+                            data-bs-toggle="dropdown" aria-expanded="false">{{userCountry}}</button>
+
+                        <ul class="dropdown-menu countries-select-menu" aria-labelledby="dropdownSplitOptions">
+                            <li class="profile-select-item" (click)="chooseCountry(iterCountry.text)"
+                                [ngClass]="{'activeItem': userCountry === iterCountry.text}"
+                                *ngFor="let iterCountry of countries">
+                                <span>{{iterCountry.text}}</span>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- end select ----- -->
+                </div>
+                <div class="billings__form-field">
+                    <div class="billings__form-label">
+                        <span>State/Province</span>
+                    </div>
+                    <input type="text" class="billings__form-input">
+                </div>
+            </div>
+
+            <div class="billings__plan-buttons in-form">
+                <button class="billings__plan-btn billings__plan-btn--accent" type="button"
+                    (click)="editBillingInfo()">Save</button>
+                <button class="billings__plan-btn" type="button" (click)="editBillingInfo()">Cancel</button>
+            </div>
+        </form>
+
+
+    </div>
+
+    <div class="billings__inner-card">
+        <button class="billings__plan-btn edit-info-btn" type="button" *ngIf="!paymentInformationForm"
+            (click)="editPaymentInfo()">Add Information</button>
+
+        <h4 class="billings__inner-card-title">Payment method</h4>
+
+        <p *ngIf="!paymentInformationForm">You have not added a payment method</p>
+
+        <form name="payment-info" class="billings__inner-form payment-form" *ngIf="paymentInformationForm">
+
+            <div class="billings__form-field-wrapper">
+                <div class="billings__form-field">
+                    <div class="billings__form-label">
+                        <span>Pay width</span>
+                    </div>
+                    <div class="billings__form-radio">
+                        <div class="radio-item">
+                            <input class="billings__form-radio-inp visually-hidden" type="radio" name="pay-method"
+                                value="credit-card" id="credit-card" checked />
+                            <label for="credit-card" class="billings__form-label"
+                                (click)="choosePaymentMethod('credit-card')">Credit card</label>
+                        </div>
+                        <div class="radio-item">
+                            <input class="billings__form-radio-inp visually-hidden" type="radio" name="pay-method"
+                                value="pay-pal" id="pay-pal" />
+                            <label for="pay-pal" class="billings__form-label"
+                                (click)="choosePaymentMethod('paypal')">PayPal account</label>
+                        </div>
+                        <div class="radio-item">
+                            <input class="billings__form-radio-inp visually-hidden" type="radio" name="pay-method"
+                                value="pay-pal" id="crypto" />
+                            <label for="crypto" class="billings__form-label"
+                                (click)="choosePaymentMethod('crypto')">Crypto currency</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="billings__credit-card  billings__payment-method-wrapper"
+                *ngIf="paymentMethod === 'credit-card'">
+                <div class="billings__form-field-wrapper w50">
+                    <div class="billings__form-field">
+                        <div class="billings__form-label">
+                            <span>Card Number</span>
+                        </div>
+                        <input type="text" class="billings__form-input" autocomplete="cc-number"
+                            (input)="inputCardNumber($event)">
+                    </div>
+                </div>
+
+                <div class="billings__form-field-wrapper card-info-wrapper">
+                    <div class="billings__form-field card-info-field">
+                        <div class="billings__form-label">
+                            <span>Expiration Date</span>
+                        </div>
+                        <div class="billings__card-expiration-container">
+
+                            <input type="text" class="billings__form-input input-month" placeholder="MM"
+                                autocomplete="cc-exp-month" (input)="inputCardExpirationMonth($event)">
+
+                            <input type="text" class="billings__form-input input-year" placeholder="YY"
+                                autocomplete="cc-exp-year" (input)="inputCardExpirationYear($event)">
+
+                        </div>
+
+                    </div>
+                    <div class="billings__form-field card-info-field card-info-field--cvv">
+                        <div class="billings__form-label">
+                            <span>CVV</span>
+                        </div>
+                        <input type="text" class="billings__form-input" autocomplete="off"
+                            (input)="inputCardExpirationCvv($event)">
+                    </div>
+                    <div class="card-cvv">
+                        <img src="assets/images/card-cvv.png" alt="card cvv number" (mouseover)="cvvPreview = true"
+                            (mouseleave)="cvvPreview = false">
+
+                        <div class="card-cvv-preview" *ngIf="cvvPreview">
+                            <img src="assets/images/cvv_preview.jpg" alt="card cvv number">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="billings__paypal  billings__payment-method-wrapper" *ngIf="paymentMethod === 'paypal'">
+                PayPal - Lorem ipsum dolor sit amet consectetur.
+            </div>
+
+            <div class="billings__crypto  billings__payment-method-wrapper" *ngIf="paymentMethod === 'crypto'">
+                Crypto - Lorem ipsum dolor sit amet consectetur.
+            </div>
+
+
+            <div class="billings__plan-buttons in-form">
+                <button class="billings__plan-btn billings__plan-btn--accent" type="button"
+                    (click)="editPaymentInfo()">Save</button>
+                <button class="billings__plan-btn" type="button" (click)="editPaymentInfo()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- </div> -->
+</div>

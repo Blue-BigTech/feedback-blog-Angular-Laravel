@@ -1,0 +1,37 @@
+.own-tooltip {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+
+  background-color: var(--dropdown-bg);
+  width: max-content;
+  max-width: 200px;
+  border: 1px solid var(--dropdown-border);
+  border-radius: 4px;
+  padding: 4px;
+  color: var(--topbar-color);
+
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  opacity: 0;
+  transition: opacity 100ms;
+
+  &::after {
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid var(--dropdown-border);
+
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

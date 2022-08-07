@@ -1,0 +1,36 @@
+.auth-container {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: relative;
+  background: #fff;
+  position: relative;
+  .back-home {
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 8px 0 0;
+    border-radius: 40px;
+    background: #e7e8ee;
+    color: #333;
+    font-size: 14px;
+    transition: 0.8s;
+    &:hover {
+      background: #ccc;
+    }
+    .back-icon {
+      height: 32px;
+      width: 32px;
+      border-radius: 40px;
+      background: #ccc;
+      margin-right: 8px;
+      text-align: center;
+    }
+  }
+}

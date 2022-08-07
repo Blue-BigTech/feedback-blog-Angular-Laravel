@@ -1,0 +1,73 @@
+/* ============================ ! ! ! ! ! ! ! =================================== */
+/* ============================ T H E M E S =================================== */
+/* ======================= CSS Variables with theme's colors ==================== */
+:root {
+    /* constant values for CSS transitions */
+    --bg-transition: background-color 400ms ease-in-out;
+    --color-transition: color 400ms ease-in-out;
+    --accent-color: #627ec9;
+}
+
+/* default values of variables for positive\negative text, we will change it with input:color and JS */
+.positive {
+    color: #57d03b;
+}
+.negative {
+    color: #ff3c41;
+}
+/* using JS we will add these classes to BODY to apply the theme */
+/* theme-1 */
+.default {
+    --bg1-color: #191e24;
+    --bg2-color: #ffffff;
+    --bg3-color: #f3f4f7;
+    --main-text-color: #55595e;
+    --hover-text-color: #84878d;
+}
+
+/* theme-2 */
+.midnight-blue {
+    --bg1-color: #191e24;
+    --bg2-color: #1f252e;
+    --bg3-color: #272d35;
+    --main-text-color: #b6bec9;
+    --hover-text-color: #ffffff;
+}
+
+/* theme-3 */
+.deep-ocean {
+    --bg1-color: #17222c;
+    --bg2-color: #1f2e3d;
+    --bg3-color: #304050;
+    --main-text-color: #cccccc;
+    --hover-text-color: #ffffff;
+}
+
+/* theme-4 */
+.monochrome {
+    --bg1-color: #171717;
+    --bg2-color: #1f1f1f;
+    --bg3-color: #2b2b2b;
+    --main-text-color: #cccccc;
+    --hover-text-color: #ffffff;
+}
+
+/* theme-5 */
+.pitch-black {
+    --bg1-color: #0c0d0d;
+    --bg2-color: #141415;
+    --bg3-color: #202122;
+    --main-text-color: #b1b2b4;
+    --hover-text-color: #ffffff;
+}
+
+/* theme-6 */
+.other-theme {
+    --bg1-color: #2b2e31;
+    --bg2-color: #ffffff;
+    --bg3-color: #f2f4f8;
+    --main-text-color: #737373;
+    --hover-text-color: #000000;
+}
+/* ============================================================================= */
+/* ============================================================================= */

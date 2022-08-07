@@ -1,0 +1,25 @@
+<div>
+  <div class="inv-card inv-m-auto inv-text-center">
+    <img src="assets/images/logo/logo-placeholder.png" class="auth-logo inv-mb-1" alt="">
+    <h4 class="inv-card-title-md inv-title-color">Sign in to InvAngular</h4>
+  </div>
+  <div class="inv-card border inv-mb-1 inv-m-auto">
+    <form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+      <div class="inv-mb-1">
+        <label for="resetemail" class="inv-form-label">Email address</label>
+        <input type="email" class="inv-form-control hover" formControlName="email" id="resetemail" placeholder="example@mail.com" aria-describedby="emailHelp">
+      </div>
+      <div class="inv-mb-1">
+        <label for="resetpassword" class="inv-form-label">Password</label>
+        <input type="password" class="inv-form-control hover" name="password" formControlName="password" id="resetpassword" placeholder="Choose your password" aria-describedby="emailHelp">
+      </div>
+      <div class="inv-mb-1">
+        <label for="resetpasswordc" class="inv-form-label">Confirm Password</label>
+        <input type="password" class="inv-form-control hover" name="password_confirmation" formControlName="password_confirmation" id="resetpasswordc" placeholder="Confirm your password" aria-describedby="emailHelp">
+      </div>
+      <div class="inv-mb-1">
+        <button type="submit" class="inv-btn inv-btn-success inv-col-10" [disabled]="!resetForm.valid">Change Password</button>
+      </div>
+    </form>
+  </div>
+</div>

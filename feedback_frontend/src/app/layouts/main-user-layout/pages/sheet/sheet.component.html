@@ -1,0 +1,78 @@
+<div class="sheetContainer p-2"><!--  *ngIf="init" -->
+
+  <!--<input type="file" (change)="onFileChange($event)">-->
+
+
+
+  <div style="width: 100%; text-align: center; top: 50%; position: absolute; transform: translate(0, -50%);" *ngIf="init">
+    Here should be the preview of the main sheet
+  </div>
+
+  <button type="button" class="btn-transparent" *ngIf="init" (click)="saveInitFile()">Save Changes</button>
+  <div ngbDropdown class="d-inline-block">
+    <button type="button" class="btn-transparent" *ngIf="!init" id="dropdownForm1" ngbDropdownToggle>Save Changes</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownForm1" class="files-dropdown shadow">
+      <div class="overlay-intern-container">
+        <div class="copy-file-form p-2">
+          <form [formGroup]="mainSheetForm">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-input col-12" formControlName="file_name" placeholder="Name">
+            </div>
+            <div class="d-flex justify-content-end">
+              <button (click)="saveInitFile()" [disabled]="!mainSheetForm.valid" class="btn-transparent">Save</button>
+            </div>
+          </form>
+        </div>
+        <div class="files-list-container">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex px-2 justify-content-between" *ngFor="let file of files; let i = index">
+              <p *ngIf="i === 0">{{file.file_name}}</p>
+              <input type="text"  *ngIf="i !== 0" class="form-input updateFileNameInput" value="{{file.file_name}}" [(ngModel)]="file.file_name" (change)="updateFileName(file.file_name, file._id.$oid)">
+              <div ngbDropdown class="d-inline-block" *ngIf="i !== 0">
+                <button class="btn-transparent delete-file-btn text-danger" id="dropdownConfirmDelete" ngbDropdownToggle>
+                  <i class="bi bi-x"></i>
+                </button>
+                <div ngbDropdownMenu class="confirm-delete-dropdown pb-0 shadow" aria-labelledby="dropdownConfirmDelete">
+                  <div class="confirm-msg px-2">Are you sure that you want to proceed?</div>
+                  <div class="confirm-btn-box">
+                    <button class="ml-auto mr-1 btn-transparent" (click)="deleteSheetVersion(file._id)">Yes</button>
+                  </div>
+                </div>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p-dialog header="SpreadSheet Name" [(visible)]="displaySheetNameModal" [position]="position" styleClass="addSheetName" [style]="{minWidth: '280px', width: '450px'}">
+
+  <div>
+    <form [formGroup]="mainSheetForm">
+      <div>
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control form-control-sm" formControlName="file_name" placeholder="Name">
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <button (click)="displaySheetNameModal=false" class="btn-transparent">Cancel</button>
+    <button (click)="saveInitFile()" [disabled]="!mainSheetForm.valid" class="btn-transparent">Save</button>
+  </ng-template>
+</p-dialog>
+
+
+<script>
+  let dropdowns = document.querySelectorAll('.dropdown-toggle')
+  dropdowns.forEach((dd)=>{
+      dd.addEventListener('click', function (e) {
+          var el = this.nextElementSibling
+          el.style.display = el.style.display==='block'?'none':'block'
+      })
+  })
+</script>

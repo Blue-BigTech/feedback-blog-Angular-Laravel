@@ -1,0 +1,115 @@
+<div class="sidebar-container" id="rightSidebarContainer" [ngClass]="{
+  'default-theme': selectedTheme === 'default-theme',
+  'midnight-blue': selectedTheme === 'midnight-blue',
+  'deep-ocean': selectedTheme === 'deep-ocean',
+  'monochrome': selectedTheme === 'monochrome',
+  'pitch-black': selectedTheme === 'pitch-black',
+  'light': selectedTheme === 'light'}" style="z-index: 11 !important;">
+
+
+  <div class="right-sidebar-navs-container rectangle" id="rightSidebarNavsContainer" [ngStyle]="style" mwlResizable
+    [validateResize]="validate" [enableGhostResize]="true" [resizeSnapGrid]="{ left:30, right: 0 }"
+    (resizeEnd)="onResizeEnd($event)">
+    <div class="resize-handle-left" mwlResizeHandle [resizeEdges]="{ left: true }"></div>
+    <div style="width: 100%; min-width: 220px !important; height: 100%; overflow: hidden; padding: 8px;">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum voluptas enim sequi accusamus perspiciatis
+        pariatur dicta officia rerum quidem, voluptatibus, odio aspernatur delectus itaque est, quae exercitationem quo!
+        Voluptas, corporis.
+      </p>
+    </div>
+  </div>
+  <div class="right-sidebar-menu">
+    <!--<div style="width: 30px; height: 36px; position: relative;">
+      <app-profile-button-and-popup></app-profile-button-and-popup>
+    </div>-->
+
+    <div class="user-profile-btn">
+      <div class="dropdown">
+        <button class="avatar-box" type="button" id="profiledropDown" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="assets/img/avatar_placeholder.png" *ngIf="user?.avatar != null" alt="" srcset="">
+          <h6 *ngIf="user?.avatar == null">{{chars}}</h6>
+          <div class="online-status"></div>
+        </button>
+        <ul class="dropdown-menu profile-drop-down me-2" aria-labelledby="dropdownMenuButton1">
+          <li class="dropdown-header">
+            <small>Signed in as</small><br>
+            <p>{{user?.fname}} {{user?.lname}}</p>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li class="profile-menu__item" id="{{item.dataBtn}}" data-bs-toggle="modal"
+              data-bs-target="#profilePopupModal" (click)="showBasicDialog(item.dataBtn)"
+              *ngFor="let item of serv.profileBtns">
+            <a class="dropdown-item profile-menu__text">
+                <i class="{{item.iconClass}}"></i>
+                <span>{{item.title}}</span>
+            </a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" routerLink="/us/settings">Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Sign Out</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+    <p-dialog [(visible)]="displayBasic" [maximizable]="true" styleClass="profile-modal" [style]="{width: '60vw', 'min-width': '800px'}">
+      <ng-template pTemplate="header">
+        <h5>{{serv.activeProfileButton}}</h5>
+      </ng-template>
+      <div class="profile-popup__body">
+        <div class="profile-popup__menu">
+          <ul class="profile-menu-list">
+              <li class="profile-menu__item" id="{{item.dataBtn}}" (click)="onMenuClick(item.dataBtn)"
+                  *ngFor="let item of serv.profileBtns" [ngClass]="{
+                          'activeButton': item.dataBtn === serv.activeProfileButton
+                      }">
+                  <a class="dropdown-item profile-menu__text">
+                      <i class="{{item.iconClass}}"></i>
+                      <span>{{item.title}}</span>
+                  </a>
+              </li>
+          </ul>
+        </div>
+        <div class="profile-popup__content">
+          <div *ngFor="let item of serv.profileBtns">
+            <div *ngIf="item.dataBtn === serv.activeProfileButton" style="padding: 8px; color: #f7f8ff; min-width: calc(100% - 200px);">
+              <app-my-profile *ngIf="item.dataBtn === 'my-profile'"></app-my-profile>
+              <app-theme-switcher *ngIf="item.dataBtn === 'colors-themes'"></app-theme-switcher>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template pTemplate="footer">
+          <p-button icon="pi pi-check" (click)="displayBasic=false" label="Ok" styleClass="p-button-text"></p-button>
+      </ng-template>
+    </p-dialog>
+
+
+
+
+
+    <!--<ul class="right-side-menu">
+      <li>
+        <button class="inv-btn" id="collapseRightBtn" onclick="collapseRight()">
+          <i class="bi bi-chevron-left" y></i>
+        </button>
+      </li>
+    </ul>-->
+
+    <!-- PDF Viewer Button -->
+    <button class="pdf-viewer-btn" type="button">
+      <span class="pdf-viewer-btn__icon">
+        <i class="bi bi-book"></i>
+      </span>
+    </button>
+
+    <!-- Help button -->
+    <div class="help-btn__wrapper">
+      <button class="help-btn">
+        <i class="bi bi-question-lg"></i>
+      </button>
+    </div>
+  </div>
+</div>

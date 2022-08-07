@@ -1,3 +1,27 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/feedback_frontend/node_modules
+/feedback_frontend/.pnp
+/feedback_frontend/.pnp.js
+
+# testing
+/feedback_frontend/coverage
+
+# production
+/feedback_frontend/build
+
+# misc
+/feedback_frontend/.DS_Store
+/feedback_frontend/.env.local
+/feedback_frontend/.env.development.local
+/feedback_frontend/.env.test.local
+/feedback_frontend/.env.production.local
+
+/feedback_frontend/npm-debug.log*
+/feedback_frontend/yarn-debug.log*
+/feedback_frontend/yarn-error.log*
+
 /vendor/
 node_modules/
 npm-debug.log

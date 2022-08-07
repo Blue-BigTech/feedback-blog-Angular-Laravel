@@ -1,0 +1,271 @@
+<!--<div class="user-container" style="background: #051e34 !important; top: 0; left: 0; right: 0; bottom: 0; position: absolute; overflow: hidden;">
+  <app-user-header></app-user-header>
+  <div class="inv-d-flex">
+    <div id="leftsidebar">
+
+    </div>
+    <div style="width: calc(100vw - 80px); margin-left: 50px; height: calc(100vh - 80px); background: #E7E8E9; border-radius: 12px; margin-top: 55px; z-index: 1; position: relative; overflow-x: hidden;">
+      <router-outlet></router-outlet>
+    </div>
+    <div id="rightsidebar">
+
+    </div>
+  </div>
+</div>-->
+
+<div class="main-layout" [ngClass]="{
+  'default-theme': selectedTheme === 'default-theme',
+  'midnight-blue': selectedTheme === 'midnight-blue',
+  'deep-ocean': selectedTheme === 'deep-ocean',
+  'monochrome': selectedTheme === 'monochrome',
+  'pitch-black': selectedTheme === 'pitch-black',
+  'other-theme': selectedTheme === 'other-theme'}"
+>
+  <div class="left_sidebar">
+    <div class="left-side-top-icon">
+      <i class="bi bi-reception-3"></i>
+    </div>
+    <div class="left_sidebar_menu">
+      <ul class="left-side-menu">
+        <li>
+          <button class="inv-btn" (click)="collapseLeft()">
+            <i class="bi bi-chevron-right" *ngIf="!collapseLeftBox"></i>
+            <i class="bi bi-chevron-left" *ngIf="collapseLeftBox"></i>
+          </button>
+        </li>
+        <li class="left-side-menu-item" *ngFor="let c of companies">
+          <button class="inv-btn left-side-btn" [ngClass]="{
+            'active-side-link': selectedCompany === c._id.$oid}" (click)="getCompany(c._id.$oid)">
+            <i class="bi bi-boxes" *ngIf="c.logo == ''"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="main_container">
+    <div class="left_collapse" *ngIf="collapseLeftBox">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellat dolorum quaerat commodi maxime laborum atque, quis quo eaque facilis totam quibusdam vel excepturi facere saepe in iure reiciendis! Doloribus.
+      </p>
+    </div>
+    <div class="main_container_content">
+      <div class="main_header" [ngClass]="{'collapsed-for-header': !collapseLeftBox, 'uncollapsed-for-header': collapseLeftBox}">
+        <div class="left-menu">
+          <a class="mainheader-link" routerLink="/us/dashboard/{{selectedCompany}}" routerLinkActive="mainheader-link-active">
+            <i class="bi bi-speedometer"></i>
+            <p class="top-bar-link">Dashboard</p>
+          </a>
+          <a class="mainheader-link" routerLink="/us/charts/{{selectedCompany}}" routerLinkActive="mainheader-link-active">
+            <i class="bi bi-graph-up-arrow"></i>
+            <p class="top-bar-link">Charts</p>
+          </a>
+          <a class="mainheader-link" routerLink="/us/sheets/{{selectedCompany}}" routerLinkActive="mainheader-link-active">
+            <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+            <p class="top-bar-link">Sheets</p>
+          </a>
+          <a class="mainheader-link" routerLink="/us/reports/{{selectedCompany}}" routerLinkActive="mainheader-link-active">
+            <i class="bi bi-bar-chart-line"></i>
+            <p class="top-bar-link">Reports</p>
+          </a>
+        </div>
+        <div class="right-menu inv-d-flex">
+          <button class="inv-btn" (click)="changeDirection()">direction</button>
+          <button class="mainheader-link">
+            <i class="bi bi-gear"></i>
+            <p class="legend">Link</p>
+          </button>
+          <div class="dropdown">
+            <button class="mainheader-link" (click)="dropDownBTN()">
+              <i class="bi bi-square"></i>
+              <p class="legend">One</p>
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#home">Home</a>
+              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
+            </div>
+          </div>
+
+          <button class="mainheader-link" (click)="changeTheme()">
+            <i class="bi bi-brightness-high"></i>
+            <p class="legend">Theme</p>
+          </button>
+          <button class="mainheader-link" (click)="fullScreen()" id="fullscreenbtn">
+            <i class="bi bi-fullscreen" *ngIf="!fullscreen"></i>
+            <i class="bi bi-fullscreen-exit" *ngIf="fullscreen"></i>
+            <p class="legend">FullScreen</p>
+          </button>
+        </div>
+      </div>
+      <div class="main_body" [ngClass]="{'collapsed-for-body': !collapseLeftBox, 'uncollapsed-for-body': collapseLeftBox}">
+
+        <as-split id="splitContainer"
+        [direction]="splitterDirection ? 'horizontal' : 'vertical'"
+        [unit]="'percent'"
+        >
+          <as-split-area
+           [size]="50"
+           [minSize]="25"
+           id="firstSplitArea"
+           (click)="detectSplitArea('splitarea1')"
+           (resized)="resizeFirstArea($event)"
+          >
+            <router-outlet></router-outlet>
+          </as-split-area>
+          <as-split-area
+           [size]="50"
+           [minSize]="25"
+           (click)="detectSplitArea('splitarea2')"
+           (resized)="resizeSecondArea($event)"
+          >
+            <router-outlet></router-outlet>
+          </as-split-area>
+        </as-split>
+
+      </div>
+    </div>
+    <div class="right-collapsible-box"  *ngIf="collapseRightBox">
+    </div>
+  </div>
+  <div class="right_sidebar">
+    <div class="right-side-top-icon">
+      <label for="gotToProfile">
+        <a type="button" id="gotToProfile" routerLink="/us/profile">
+          <i class="bi bi-person-fill"></i>
+        </a>
+      </label>
+    </div>
+    <div class="right_sidebar_menu">
+      <ul class="right-side-menu">
+        <li>
+          <button class="inv-btn" (click)="collapseRight()">
+            <i class="bi bi-chevron-right" *ngIf="collapseRightBox"></i>
+            <i class="bi bi-chevron-left" *ngIf="!collapseRightBox"></i>
+          </button>
+        </li>
+        <li class="left-side-menu-item">
+          <button class="inv-btn left-side-btn">
+            <i class="bi bi-speedometer2"></i>
+          </button>
+        </li>
+        <li class="left-side-menu-item">
+          <button class="inv-btn left-side-btn">
+            <i class="bi bi-send-dash-fill"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="change-theme-dialog" [ngClass]="{
+  'default-theme': selectedTheme === 'default-theme',
+  'midnight-blue': selectedTheme === 'midnight-blue',
+  'deep-ocean': selectedTheme === 'deep-ocean',
+  'monochrome': selectedTheme === 'monochrome',
+  'pitch-black': selectedTheme === 'pitch-black',
+  'other-theme': selectedTheme === 'other-theme'}" *ngIf="changeThemeDialog"
+>
+
+  <div class="change-theme-content">
+    <button class="close-dialog" (click)="ClosechangeTheme()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <h2>Theme Selection</h2>
+
+    <div class="themes-container">
+      <div class="theme-item default-theme m-2" (click)="change('default-theme')">
+        <i class="bi bi-check-circle-fill" *ngIf="selectedTheme === 'default-theme'"></i>
+        <div class="theme-container-box">
+          <div class="header">
+            <div class="placeholder"></div>
+          </div>
+          <div class="body">
+            Default
+          </div>
+        </div>
+      </div>
+      <div class="theme-item midnight-blue-theme m-2" (click)="change('midnight-blue')">
+        <i class="bi bi-check-circle-fill" *ngIf="selectedTheme === 'midnight-blue'"></i>
+        <div class="theme-container-box">
+          <div class="header">
+            <div class="placeholder"></div>
+          </div>
+          <div class="body">
+            midnight blue
+          </div>
+        </div>
+      </div>
+      <div class="theme-item deep-ocean-theme m-2" (click)="change('deep-ocean')">
+        <i class="bi bi-check-circle-fill" *ngIf="selectedTheme === 'deep-ocean'"></i>
+        <div class="theme-container-box">
+          <div class="header">
+            <div class="placeholder"></div>
+          </div>
+          <div class="body">
+            Deep Ocean
+          </div>
+        </div>
+      </div>
+      <div class="theme-item monochrome-theme m-2" (click)="change('monochrome')">
+        <i class="bi bi-check-circle-fill" *ngIf="selectedTheme === 'monochrome'"></i>
+        <div class="theme-container-box">
+          <div class="header">
+            <div class="placeholder"></div>
+          </div>
+          <div class="body">
+            monochrome
+          </div>
+        </div>
+      </div>
+      <div class="theme-item pitch-black-theme m-2" (click)="change('pitch-black')">
+        <i class="bi bi-check-circle-fill" *ngIf="selectedTheme === 'pitch-black'"></i>
+        <div class="theme-container-box">
+          <div class="header">
+            <div class="placeholder"></div>
+          </div>
+          <div class="body">
+            Pitch Black
+          </div>
+        </div>
+      </div>
+      <div class="theme-item other-theme m-2" (click)="change('other-theme')">
+        <i class="bi bi-check-circle-fill" *ngIf="selectedTheme === 'other-theme'"></i>
+        <div class="theme-container-box">
+          <div class="header">
+            <div class="placeholder"></div>
+          </div>
+          <div class="body">
+            Other
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+  <button class="btn m-2" (click)="change('default-theme')">Default</button>
+  <button class="btn m-2" (click)="change('midnight-blue')">midnight blue</button>
+  <button class="btn m-2" (click)="change('deep-ocean')">Deep Ocean</button>
+  <button class="btn m-2" (click)="change('monochrome')">monochrome</button>
+  <button class="btn m-2" (click)="change('pitch-black')">Pitch Black</button>
+  <button class="btn m-2" (click)="change('other-theme')">Other</button>
+
+-->

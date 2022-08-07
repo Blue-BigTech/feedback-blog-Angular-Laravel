@@ -1,0 +1,50 @@
+.avatar-container {
+  width: 110px;
+  height: 110px;
+  position: relative;
+  border-radius: 50%;
+}
+.profile-avatar-box {
+  width: 110px;
+  height: 110px;
+  background: var(--monochrome-transparent);
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  .avatar-placeholder {
+    width: 90%;
+    margin: 5% 7%;
+    svg {
+      fill: #fff;
+    }
+  }
+
+}
+.upload-avatar-btn {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  border-radius: 50%;
+  background: var(--tabs-bar-bg);
+  border: 1px solid var(--main-area-bg);
+  transition: .5s;
+  cursor: pointer;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  &:hover {
+    background: var(--main-area-bg);
+  }
+}
+
+.avatar {
+  margin: -2%;
+  height: 104%;
+  width: 104%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+

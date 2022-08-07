@@ -1,0 +1,45 @@
+.billings {
+  &__title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--main-color);
+    text-transform: capitalize;
+
+    margin-bottom: 10px;
+
+    display: flex;
+    align-items: center;
+  }
+  &__box {
+    max-width: 100%;
+    border-radius: 6px;
+    // border: 1px solid var(--dropdown-border);
+    background-color: var(--bottom-nav-bg);
+    padding: 30px;
+    margin-bottom: 25px;
+    color: var(--main-color);
+  }
+  &__card-title {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    margin: 0;
+    &--medium {
+      font-size: 14px;
+    }
+    &--large {
+      font-size: 18px;
+    }
+  }
+}
+.payment-history-icon {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 400;
+  color: inherit;
+  margin-bottom: 15px;
+}
+.tac {
+  text-align: center;
+}

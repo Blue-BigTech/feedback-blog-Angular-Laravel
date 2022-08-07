@@ -1,0 +1,394 @@
+$bg-dark0: #000000;
+$bg-dark1: #060606;
+$bg-dark2: #161616;
+$bg-dark3: #202020;
+$bg-dark4: #363636;
+$bg-dark5: #282828;
+
+$bg-border: #333333;
+
+$color1: #dcddde;
+$color2: #979796;
+
+
+
+.inv-dynamic-navs {
+  top: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  height: 30px;
+  background: $bg-dark1;
+  z-index: 10;
+  .inv-tabs-list {
+    display: flex;
+    background: transparent;
+    line-height: 30px;
+    padding: 0 !important;
+    max-width: calc(100% - 120px);
+    min-width: calc(100% - 120px);
+    height: 30px;
+    position: relative;
+    &::-webkit-scrollbar {
+      height: 0px;
+      background: transparent;
+      border-radius: 0px;
+      padding-right: 220px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 5px;
+    }
+    .inv-add-tab-item {
+      margin: 0;
+      background: transparent;
+      padding: 0;
+      color: $color2;
+      height: 30px;
+      transition: 0.5s;
+      z-index: 0;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      .inv-add-tab-box {
+        .inv-add-tab-overlay {
+          height: 30px;
+          width: 210px;
+          background: $bg-dark2;
+          position: relative;
+          line-height: 29px;
+          display: flex;
+          .inv-add-tab-input {
+            height: 22px;
+            width: 150px;
+            border: none;
+            margin: auto 4px;
+            border-radius: 2px !important;
+            background: transparent;
+            border: 1px solid $bg-border;
+            color: #fff;
+            &::placeholder {
+              color: $color2;
+              font-weight: thin !important;
+              font-size: 12px !important;
+            }
+          }
+          .inv-button-sm {
+            width: 20px;
+            height: 20px;
+            border-radius: 1px;
+            background: transparent;
+            margin: auto 2px;
+            border: none;
+            padding: 0;
+            line-height: 22px;
+            transition: 0.5s;
+            &:disabled {
+              background: transparent;
+              color: #ccc;
+              &:hover {
+                background: transparent;
+                color: #ccc;
+              }
+            }
+            &:hover {
+              background: $bg-dark4;
+            }
+          }
+          .inv-text-success {
+            color: #14a800;
+          }
+          .inv-text-danger {
+            color: #b31c1c;
+          }
+        }
+      }
+      .inv-add-tab-btn {
+        width: 20px;
+        height: 20px;
+        border-radius: 3px;
+        background: transparent;
+        z-index: 2;
+        margin: 5px;
+        font-size: 18px;
+        padding: 0 !important;
+        border: none;
+        line-height: 20px;
+        padding-top: 1px;
+        color: $color2;
+        transition: 0.5s;
+      }
+      &:hover {
+        .inv-add-tab-btn {
+          background: rgba(255,255,255,.2);
+          color: $color1;
+        }
+      }
+    }
+    .inv-next-prev-tab {
+      margin: 0;
+      background: transparent;
+      padding: 0;
+      color: $color2;
+      height: 28px;
+      width: 28px;
+      transition: 0.5s;
+      z-index: 0;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      .inv-next-prev-btn {
+        min-width: 30px !important;
+        min-height: 30px !important;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: $color2;
+        font-size: 16px;
+        &:hover {
+          background: $bg-dark2;
+        }
+        &:disabled {
+          color: $bg-dark4;
+          background: $bg-dark2;
+          &:hover {
+            color: $bg-dark4;
+            background: $bg-dark2;
+            cursor: default !important;
+          }
+        }
+      }
+    }
+    .inv-tab-item {
+      margin: 0;
+      background: $bg-dark4;
+      padding: 0 26px 0 15px;
+      color: $color2;
+      height: 30px;
+      transition: 0.5s;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      &:focus {
+        cursor: move !important;
+      }
+
+      p {
+        height: 30px;
+        background: transparent;
+        padding: 0 8px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .inv-delete-tab-btn {
+        width: 20px;
+        height: 20px;
+        border-radius: 3px;
+        background: transparent;
+        color: #f7f8f9;
+        z-index: 2;
+        margin: 5px;
+        font-size: 14px;
+        line-height: 20px !important;
+        padding: 0 !important;
+        padding-top: 1px !important;
+        display: none;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        transition: 0.5s;
+        outline: none !important;
+        border: none !important;
+        &:hover {
+          background: rgba(255,255,255,.2);
+        }
+      }
+      &:hover {
+        background: $bg-dark3;
+        .inv-delete-tab-btn {
+          display: block;
+          outline: none !important;
+        }
+      }
+
+    }
+    .inv-active-tab {
+      background: $bg-dark3 !important;
+      .inv-delete-tab-btn {
+        display: block;
+      }
+    }
+  }
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.example-custom-placeholder {
+  background: $bg-dark2 !important;
+  border: dotted 3px $bg-dark4;
+  min-width: 120px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.inv-tabs-list.cdk-drop-list-dragging .inv-tab-item:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+.h-1-3 {
+  height: calc((100vh - 86px)/ 3) !important;
+}
+.h-1-2 {
+  height: calc((100vh - 86px)/ 2) !important;
+}
+.h-1-1 {
+  height: calc((100vh - 86px)) !important;
+}
+
+
+
+
+
+
+mwlResizable {
+  box-sizing: border-box; /* required for the enableGhostResize option to work*/
+}
+.resize-handle-top,
+.resize-handle-bottom {
+  position: absolute;
+  height: 5px;
+  cursor: row-resize;
+  width: 100%;
+}
+
+.resize-handle-top {
+  top: 0;
+}
+
+.resize-handle-bottom {
+  bottom: 0;
+}
+
+.resize-handle-left,
+.resize-handle-right {
+  position: absolute;
+  height: 100%;
+  cursor: col-resize;
+  width: 5px;
+  /*background: #fff;
+  .bi {
+    color: #ff3333;
+  }*/
+}
+
+.resize-handle-left {
+  left: 0;
+}
+
+.resize-handle-right {
+  right: 0;
+}
+
+/* SPLITTER STYLING */
+/*::ng-deep .as-split-gutter {
+  width: 2px !important;
+  background-color: $bg-dark2 !important;
+}
+::ng-deep .as-split-gutter-icon {
+  background-color: transparent !important;
+  width: 2px !important;
+  padding: 0 !important;
+  border: none !important;
+  max-width: 2px !important;
+}
+*/
+
+
+
+.horizontal ::ng-deep .as-split-gutter {
+  background-color: $bg-dark2 !important;
+  max-width: 4px !important;
+}
+.vertical ::ng-deep .as-split-gutter {
+  background-color: $bg-dark2 !important;
+  max-height: 4px !important;
+  max-width: 100% !important;
+}
+::ng-deep .as-split-gutter-icon {
+  color: #ff3333 !important;
+}
+
+
+.alert-container {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin-top: 32px;
+  position: absolute;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  padding-top: 120px;
+  .alert-box {
+    max-width: 440px;
+    height: auto;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $bg-dark4;
+    .inv-card-title {
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .new-window-link {
+      text-decoration: none;
+      font-size: 18px;
+      color: $color1;
+      transition: 0.5s;
+      &:hover {
+        color: #00a2ff;
+      }
+    }
+
+  }
+}
+
+
+::ng-deep .p-confirm-popup {
+  background: $bg-dark2 !important;
+  color: $color1;
+  &:before {
+    border: solid transparent;
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: $bg-dark2;
+    margin-left: -23px !important;
+  }
+  &:after {
+    border-bottom-color: $bg-dark2;
+    margin-left: -23px !important;
+  }
+  .p-confirm-popup-reject {
+    background: $bg-dark4 !important;
+    color: $color2;
+    &:hover {
+      color: $color1 !important;
+    }
+  }
+  .p-confirm-popup-accept {
+    background: #2e00d6;
+    &:hover {
+      background: #2300a0;
+    }
+  }
+  .p-confirm-popup-reject ,
+  .p-confirm-popup-accept {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+    padding: 5px 12px !important;
+  }
+}

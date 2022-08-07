@@ -1,0 +1,189 @@
+<div class="feedback-wrapper">
+    <div class="fb-posts">
+        <div class="fb-posts__header">
+            <h2 class="fb-posts__title">
+                <span>Showing</span>
+                <!-- -------- select --------- -->
+                <div class="fb-posts__select">
+
+                    <button class="select-btn" type="button" id="dropdownSplitOptions" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <span>{{sortType}}</span>
+                        <span class="select-arrow-pointer">
+                            <!-- <i class="bi bi-caret-down"></i> -->
+                            <i class="bi bi-caret-up-fill"></i>
+                            <i class="bi bi-caret-down-fill"></i>
+                        </span>
+                    </button>
+
+                    <div class="dropdown-menu select-menu" aria-labelledby="dropdownSplitOptions"
+                        style="display: flex;">
+                        <ul class="select-submenu">
+                            <li class="select-item select-item__title">Sort</li>
+                            <li 
+                                class="select-item" 
+                                (click)="chooseSortType(item)"
+                                [ngClass]="{'activeItem': sortType === item}" 
+                                *ngFor="let item of sortTypes">
+                                {{item}}
+                            </li>
+                        </ul>
+
+                        <ul class="select-submenu">
+                            <li class="select-item select-item__title">Filter</li>
+                            <li 
+                                class="select-item" 
+                                (click)="chooseSortType(item)"
+                                [ngClass]="{'activeItem': sortType === item}" 
+                                *ngFor="let item of filterTypes">
+                                {{item}}
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- -------- end select --------- -->
+                <span>posts</span>
+            </h2>
+
+            <button 
+                *ngIf="!dataCommentService.allCommentsVisible"
+                class="fb-form__button return-btn" 
+                (click)="dataCommentService.returnToAllComments()">
+                <i class="bi bi-arrow-left"></i>
+                <span>Back to all posts</span>
+            </button>
+            <div style="position: relative;">
+                <button
+                    type="button"   
+                    class="fb-posts__notification-btn"
+                    id="dropdownNotification1"
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false" 
+                    (click)="onCheckInfo()" >
+                    <i class="bi bi-bell-fill"></i>
+                    <span 
+                        class="badge rounded-pill badge-notification bg-danger" 
+                        alt="Notifications" 
+                        style="color: rgb(255, 255, 255) !important;" 
+                        *ngIf="dataCommentService.notifyInfoCount !== 0">
+                        {{dataCommentService.notifyInfoCount}}
+                    </span>
+                </button>
+
+                <div class="dropdown-menu notify-select-menu" aria-labelledby="dropdownNotification1" style="overflow-y: auto; max-height: 402px;">
+                    <span 
+                        *ngIf="dataCommentService.notifyInfoCount === 0 && !dataCommentService.stopCheckNotify">
+                        You have no notifications.
+                    </span>
+                    <div                        
+                        class="notify-select-content"
+                        *ngFor="let feedback of dataCommentService.notifyInfo.feedbacks">                        
+                        <p>{{feedback.updated_at.slice(0, 10)}}</p>
+                        <p class = "font-w700 font-S14">{{feedback.title}}</p>
+                        <p class = "font-cC">{{filterTypes[feedback.status - 1]}}</p>
+                    </div>
+                    <div 
+                        class="notify-select-content" 
+                        *ngFor="let feedbackComment of dataCommentService.notifyInfo.feedbackcomments">                        
+                        <p>{{feedbackComment.updated_at.slice(0, 10)}}</p>
+                        <p class = "font-w700 font-S14">{{feedbackComment.user_name}}</p>
+                        <p>{{feedbackComment.comment}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="fb-posts__content" *ngIf="dataCommentService.allCommentsVisible">
+
+            <!-- --- start post item ----- -->
+            <div class="fb-posts__post" *ngFor="let item of dataCommentService.getFeedbacks(sortType)">
+                <div class="fb-posts__post-votes" (click)="dataCommentService.onUpvote(item._id)">
+                    <i class="bi bi-caret-up-fill"></i>
+                    <span class="votes-count">{{item.votes.length}}</span>
+                </div>
+                <a class="fb-posts__post-link" (click)="dataCommentService.openSubcomments(item._id)">
+                    <div class="fb-posts__post-body">
+                        <h4 class="fb-posts__post-title">{{item.title}}</h4>
+                        <p class="fb-posts__post-type">{{filterTypes[item.status - 1]}}</p>
+                        <p class="fb-posts__post-details">{{ (item.details.length>400)? (item.details | slice:0:400)+'...':(item.details) }}</p>
+                        <p *ngFor="let file of item.file"></p>
+                    </div>
+                </a>
+                <div class="fb-posts__select">
+
+                    <!-- comments count part -->
+                    <div class="fb-posts__post-comments margin-b15">
+                        <i class="bi bi-chat-left-text"></i>
+                        <span class="comments-counter">{{item.comments.length}}</span>
+                    </div>
+
+                    <!-- user setting dropdown part -->
+                    <button class="select-btn" type="button" id="dropdownSplitOptions" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="role === '0' && item.user_id === userId && item.status !== 4">
+                        <span class="select-arrow-pointer three-dot-icon">
+                            <i style ="font-size:14px;"class="bi bi-three-dots-vertical"></i>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu select-menu" aria-labelledby="dropdownSplitOptions"
+                        style="display: flex;">
+                        <ul class="select-submenu">
+                            <li class="select-item select-item__title">setting</li>
+                            <li class="select-item" (click)="onMore(type, item, mymodal)"
+                            *ngFor="let type of settingTypes">
+                                {{type}}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- admin setting dropdown part -->
+                    <button class="select-btn" type="button" id="dropdownSplitOptions" data-bs-toggle="dropdown"
+                        aria-expanded="false" *ngIf="role === '1'">
+                        <span class="select-arrow-pointer three-dot-icon">
+                            <i style ="font-size:14px;"class="bi bi-three-dots-vertical"></i>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu select-menu" aria-labelledby="dropdownSplitOptions"
+                        style="display: flex;" *ngIf="role === '1'">
+                        <ul class="select-submenu">
+                            <li class="select-item select-item__title">setting</li>
+                            <li class="select-item" (click)="onMore(type, item, mymodal)"
+                            *ngFor="let type of settingTypes">
+                                {{type}}
+                            </li>
+                        </ul>
+                        <ul class="select-submenu">
+                            <li class="select-item select-item__title">status</li>
+                            <li class="select-item" (click)="chooseStatusType(type, item)"
+                                [ngClass]="{'activeItem': filterTypes[item.status - 1] === type}" *ngFor="let type of filterTypes">
+                                {{type}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- --- end post item ----- -->
+        </div>
+
+        <!-- for subcomment component -->
+        <app-comment *ngIf="!dataCommentService.allCommentsVisible"></app-comment>
+
+        <!-- start delete modal -->
+        <ng-template #mymodal let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title"><i class="fas fa-exclamation-triangle"></i> Are you sure?</h4>
+              <button type="button" style="outline: none;" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h6>{{seletedTitle}}</h6>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+            </div>
+        </ng-template>
+        <!-- end delete modal -->
+
+    </div>
+</div>

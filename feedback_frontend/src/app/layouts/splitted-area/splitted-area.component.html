@@ -1,0 +1,214 @@
+<div class="main-area-content-box">
+  <div class="tabs-container d-flex">
+    <div class="d-flex company-in-tabs">
+      <div class="company-ticker d-flex">
+        <img style="width: 20px; height: 20px; border-radius: 50%; margin-top: 7px; margin-right: 5px; text-align: left;" *ngIf="currentCompany?.logo !== ''" src="{{filepath}}companies-logo/{{currentCompany?.logo}}" alt="">
+        <div style="width: 20px; height: 20px; border-radius: 50%; margin-top: 7px; margin-right: 5px; background: var(--top-bar-bg); color: var(--topbar-color); line-height: 20px; text-align: center; padding: 0; font-size: 12px;" *ngIf="currentCompany?.logo === ''">{{currentCompany?.ticker[0]}}</div>
+        {{currentCompany?.ticker}}
+      </div>
+    </div>
+    <ul class="component-links-container">
+      <li class="inv-nav-item">
+        <button (click)="setSelectedRouterLink('charts')" class="inv-nav-link cursor-pointer"
+          [ngClass]="{'activeComponent': componentRouterLink == 'charts' }">
+          <span class="inv-nav-link__icon-svg">
+            <svg style="width: 14px; height: 14px;">
+              <use href="assets/img/sprite.svg#plot-icon-2"></use>
+            </svg>
+          </span>
+          <span>Plot</span>
+        </button>
+      </li>
+      <li class="inv-nav-item">
+        <button (click)="setSelectedRouterLink('sheets')" class="inv-nav-link cursor-pointer"
+          [ngClass]="{'activeComponent': componentRouterLink == 'sheets'}">
+          <span class="inv-nav-link__icon-svg">
+            <svg style="width: 14px; height: 14px; transform: scale(1.2);">
+              <use href="assets/img/sprite.svg#model-icon-2"></use>
+            </svg>
+          </span>
+          <span>Model</span>
+        </button>
+      </li>
+      <li class="inv-nav-item">
+        <button (click)="setSelectedRouterLink('report')" class="inv-nav-link cursor-pointer"
+          [ngClass]="{'activeComponent': componentRouterLink == 'report'}">
+          <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+          <span>Report</span>
+        </button>
+      </li>
+    </ul>
+    <ul class="tabs-content" cdkDropListOrientation="horizontal" cdkDropList (cdkDropListDropped)="drop($event)">
+      <li class='inv-tab-item d-flex' *ngFor="let t of tabs" id="{{t._id.$oid}}" [ngClass]="{'inv-active-tab': t._id.$oid == activeTab}" cdkDragBoundary=".inv-tabs-list" cdkDrag cdkDragHandle>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <p (click)="openTopTab($event, t._id.$oid)" class="tab-name nowrap-text" *ngIf="updateTabName && UpdatedTabId != t._id.$oid || !updateTabName">{{t.name}}</p>
+        <div class="dropcontainer" *ngIf="!updateTabName">
+          <div class="dropdown">
+            <button class="inv-delete-tab-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu  tab-dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" type="button"  (click)="open(content)">Delete Tab</a></li>
+              <li><a class="dropdown-item" (click)="openUpdate(t._id.$oid)">Update Name</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <form class="inv-d-flex" *ngIf="updateTabName && UpdatedTabId == t._id.$oid">
+          <input type="text" class="inv-form-control inv-tab-input" name="updatedName" placeholder="Enter Tab Name" [(ngModel)]="updatedName">
+          <button class="inv-update-tab-btn inv-text-success" (click)="saveTabNameUpdate(t._id.$oid)">
+            <i class="bi bi-check"></i>
+          </button>
+        </form>
+
+        <ng-template #content let-modal  class="example-dialog-content">
+          <div class="modal-header delete-modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel">
+              <i class="bi bi-trash3-fill"></i><br>
+              Delete Tab
+            </h5>
+
+            <button type="button" class="btn btn-sm close-btn text-white" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          <div class="modal-body delete-modal-body">
+            <p class="mb-5 text-center">
+              Deleting a tab will permanently delete it from your account.
+            </p>
+            <div class="d-flex">
+              <button type="button" class="col mx-1 btn cancel-delete-btn-modal" (click)="modal.dismiss('Cross click')">No, Keep Tab</button>
+              <button type="button" class="col btn delete-btn-danger" (click)="deleteTab(modal, t._id.$oid)">Yes, Delete Tab</button>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+
+      <li class='inv-add-tab-item'>
+        <button class="inv-add-tab-btn" (click)="addNewTab()" *ngIf="!addingTab">
+          <i class="bi bi-plus"></i>
+        </button>
+        <div class="inv-add-tab-overlay" *ngIf="addingTab">
+          <form class="inv-d-flex" [formGroup]="newTabForm" (ngSubmit)="storeNewTab()">
+            <input type="text" class="inv-form-control inv-tab-input" placeholder="Enter Tab Name" formControlName="name">
+            <button class="inv-button-sm inv-text-success" [disabled]="!newTabForm.valid">
+              <i class="bi bi-check"></i>
+            </button>
+          </form>
+          <button class="inv-button-sm inv-text-danger" (click)="cancelAddTab()">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+      </li>
+
+    </ul>
+    <div class="inv-navbar-menu inv-d-flex pr-1">
+      <!--<button (click)="undoAction()" style="transform: rotate(180deg) !important" class="tabsright-btn-item cursor-pointer" [attr.disabled]="prevaction == 1 ? true : null">
+        <i class="bi bi-arrow-return-right"></i>
+      </button>
+      <button (click)="redoAction()" style="transform: rotate(180deg) !important" class="tabsright-btn-item cursor-pointer" [attr.disabled]="nextaction == actionIndex ? true : null">
+        <i class="bi bi-arrow-return-left"></i>
+      </button>-->
+
+      <button type="button" (click)="splitArea('vr')" class="tabsright-btn-item cursor-pointer">
+        <i class="bi bi-vr"></i>
+      </button>
+      <button type="button" (click)="splitArea('hr')" class="tabsright-btn-item tabsright-btn-item-hr cursor-pointer">
+        <i class="bi bi-hr"></i>
+      </button>
+
+      <div class="dropdown">
+        <button class="tabsright-btn-item cursor-pointer" id="dropdownSplitOptions" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-three-dots"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownSplitOptions">
+          <li><a class="dropdown-item cursor-pointer" type="button" (click)="closeAllOtherPanes()"><span>Close Other Areas</span></a></li>
+          <li><a class="dropdown-item cursor-pointer" href="#"><span>Something else here</span></a></li>
+          <li><a class="dropdown-item cursor-pointer" href="#"><span>Something else here</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-logo-container" *ngIf="tabs.length === 0 && !addingTab">
+    <div class="svg-content">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+    </div>
+  </div>
+
+  <div class="tabs-body-container" *ngFor="let tc of tabs" [ngClass]="{'inv-active-tab-content': tc._id.$oid == activeTab}">
+
+      <!--<router-outlet></router-outlet>-->
+      <div class="main-area-container" id="{{tc?._id.$oid}}">
+        <div class="main-logo-container"  *ngIf="columns.length == 0">
+          <div class="svg-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <br><br><br>
+            <div class="justify-content-center d-flex">
+              <a class="createNewAreaLink" (click)="splitArea('vr')">Create new area</a>
+            </div>
+          </div>
+        </div>
+        <as-split direction="horizontal" class="horizontal" [ngClass]="{
+          'three-splitArea': columns.length == 3,
+          'two-splitArea': columns.length == 2,
+          'one-splitArea': columns.length == 1
+        }" (dragEnd)="onDragEnd(-1, $event)" [unit]="'percent'">
+          <ng-template ngFor let-column [ngForOf]="columns" let-icol="index">
+            <as-split-area [order]="icol" [size]="column.size">
+              <as-split direction="vertical" class="vertical" (dragEnd)="onDragEnd(icol, $event)" [unit]="'percent'">
+                <ng-template ngFor let-row [ngForOf]="column.rows" let-irow="index" style="position: relative !important;">
+                  <as-split-area class="pane-item" [order]="irow" [size]="row.size" [ngClass]="{'selected-pane': row.paneIdent == selectedPaneId}" (click)="selectPane(row.paneIdent)" style="position: relative !important;">
+                    <div class="pane-item-container">
+                      <p-confirmPopup></p-confirmPopup>
+                      <app-dash *ngIf="row.routerLink == 'dashboard'" [row]="row"></app-dash>
+                      <app-chart *ngIf="row.routerLink == 'charts'" [row]="row"></app-chart>
+                      <app-sheet *ngIf="row.routerLink == 'sheets'" [row]="row"></app-sheet>
+                      <app-report *ngIf="row.routerLink == 'report'" [row]="row"></app-report>
+                    </div>
+                    <button class="btn delete-fullScreen-btn delete-pane-btn" (click)="deletePaneItem(row.paneIdent)" *ngIf="row.paneIdent == selectedPaneId">
+                      <i class="bi bi-x-lg"></i>
+                    </button>
+                    <button class="btn delete-fullScreen-btn fullScreen-pane-btn" (click)="fullScreenPane()" *ngIf="row.paneIdent == selectedPaneId">
+                      <span class="pi pi-window-maximize"></span>
+                    </button>
+
+                  </as-split-area>
+                </ng-template>
+              </as-split>
+            </as-split-area>
+          </ng-template>
+        </as-split>
+
+        <div class="alert-container" *ngIf="columns.length === 0">
+          <div class="alert-box border-top border-warning border-0 border-5">
+            <h4 class="inv-card-title">No Window is opened</h4>
+            <hr>
+
+            <a class="inv-card-title-sm cursor-pointer new-window-link" (click)="splitArea('vr')">Create new window (Ctrl + N)</a>
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+  <div class="extra-splitAreaContainer">
+    <div *ngFor="let c of columns">
+      <div *ngFor="let row of c.rows" id="{{row.paneIdent}}" class="extra-item">
+        <div class="pane-item-container">
+          <button class="btn btn-sm exit-pane-fullScreen-btn" style="z-index: 1000 !important;" (click)="closeBox(row.paneIdent)">
+            <span class="pi pi-window-minimize"></span>
+          </button>
+          <p-confirmPopup></p-confirmPopup>
+          <app-dash *ngIf="row.routerLink == 'dashboard'" [row]="row"></app-dash>
+          <app-chart *ngIf="row.routerLink == 'charts'" [row]="row"></app-chart>
+          <app-sheet *ngIf="row.routerLink == 'sheets'" [row]="row"></app-sheet>
+          <app-report *ngIf="row.routerLink == 'report'" [row]="row"></app-report>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

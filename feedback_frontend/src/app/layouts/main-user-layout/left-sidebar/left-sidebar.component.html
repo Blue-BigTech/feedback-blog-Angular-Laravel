@@ -1,0 +1,92 @@
+<div class="inv-sidebar-container" [ngClass]="{
+  'atom-theme-dark': selectedDarkTheme === 'atom-theme' && selectedThemeMode === 'dark',
+  'atom-v2': selectedDarkTheme === 'atom-theme-2' && selectedThemeMode === 'dark',
+  'atom-theme-light': selectedLightTheme === 'atom-theme' && selectedThemeMode === 'light',
+  'solarized-theme-dark': selectedDarkTheme === 'solarized-theme' && selectedThemeMode === 'dark',
+  'solarized-theme-light': selectedLightTheme === 'solarized-theme' && selectedThemeMode === 'light',
+  'tokyo-theme-dark': selectedDarkTheme === 'tokyo-theme' && selectedThemeMode === 'dark',
+  'tokyo-theme-light': selectedLightTheme === 'tokyo-theme' && selectedThemeMode === 'light'}"
+  id="leftSidebarContainer">
+
+  <div class="sidebar-outer-container">
+    <div>
+      <button (click)="onSwitchArea()" *ngIf="!switchArea" class="switchAreaBtn" style="transform: rotateY(180deg);">
+        <i class="bi bi-square-half"></i>
+      </button>
+      <button (click)="onSwitchArea()" *ngIf="switchArea" class="switchAreaBtn">
+        <i class="bi bi-square-half"></i>
+      </button>
+    </div>
+    <div class="companies-list">
+      <ul>
+        <li *ngFor="let c of companies" class="cursor-pointer">
+          <a (click)="setCompany(c._id.$oid)">
+            <div style="justify-content: center;">
+              <img style="width: 25px; height: 25px; border-radius: 50%;" *ngIf="c?.logo !== ''" src="{{filepath}}companies-logo/{{c?.logo}}" alt="">
+              <div style="width: 24px; height: 24px; border: 1px solid var(--main-area-bg); border-radius: 50%; margin: 6px auto 0 auto; background: var(--left-side-expand-bg); color: var(--topbar-color); line-height: 24px; text-align: center; padding: 0; font-size: 12px;" *ngIf="c?.logo === ''">{{c?.ticker[0]}}</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="dropContainer" style="overflow-x: hidden !important;  border-right: 1px solid var(--top-bar-bg);">
+      <button class="user-profile-btn" type="button" id="userProfileBtn" (click)="openProfileWindow()">
+        <i class="bi bi-person-circle"></i>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+<p-dialog position="center" [keepInViewport]="false" [resizable]="false" [(visible)]="popupsService.displayProfilePopup"
+  styleClass="popup-modal">
+  <ng-template pTemplate="header">
+    <!--<h5>{{serv.activeProfileButton}}</h5>-->
+    <div style="position: relative; height: 100%;" (click)="underLine($event)">
+      <div class="nav-line" [style.left]="underLinkLinePosition" [style.width]="underLinkLineWidth"></div>
+      <ul class="popup-nav-menu">
+        <li class="popup-nav-menu__item" [ngClass]="{'nav-line': item.dataBtn === serv.activeProfileButton}"
+          id="{{item.dataBtn}}" (click)="onMenuClick($event, item.dataBtn)" *ngFor="let item of serv.profileBtns"
+          [ngClass]="{
+                            'activeButton': item.dataBtn === serv.activeProfileButton
+                        }">
+          <a class="popup-nav-menu__link">
+            <i class="{{item.iconClass}}"></i>
+            <span>{{item.title}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </ng-template>
+  <div class="popup__body">
+    <!--<div class="popup__menu">
+      <ul class="profile-menu-list">
+        <li class="profile-menu__item" id="{{item.dataBtn}}" (click)="onMenuClick(item.dataBtn)"
+          *ngFor="let item of serv.profileBtns" [ngClass]="{
+                      'activeButton': item.dataBtn === serv.activeProfileButton
+                  }">
+          <a class="dropdown-item profile-menu__text">
+            <i class="{{item.iconClass}}"></i>
+            <span>{{item.title}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>-->
+    <div class="popup__content">
+      <div *ngFor="let item of serv.profileBtns">
+        <div *ngIf="item.dataBtn === serv.activeProfileButton">
+          <app-my-profile *ngIf="item.dataBtn === 'my-profile'"></app-my-profile>
+          <app-theme-switcher *ngIf="item.dataBtn === 'colors-themes'"></app-theme-switcher>
+          <app-plans-billings *ngIf="item.dataBtn === 'plans-billings'"></app-plans-billings>
+        </div>
+      </div>
+      <app-all-plans *ngIf="serv.activeProfileButton === 'all-plans'"></app-all-plans>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <!--<p-button icon="pi pi-check" (click)="displayBasic=false" label="Ok" styleClass="p-button-text"></p-button>-->
+    <button class="inv-btn p-dialog-footer-btn" (click)="popupsService.displayProfilePopup=false">Ok</button>
+  </ng-template>
+</p-dialog>

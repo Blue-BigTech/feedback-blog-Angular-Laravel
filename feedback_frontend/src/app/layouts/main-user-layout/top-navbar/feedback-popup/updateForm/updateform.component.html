@@ -1,0 +1,24 @@
+<form class="fb-posts__subcomment-input-form">
+    <input type="text" class="fb-form__input fb-posts__subcomment-input" placeholder="Leave a comment"
+        (focus)="showDropdownField()" (input)="onCommentContentChange($event)" (blur)="hideDropdownField()" [ngClass]="{'error-border': emptyCommentContent}" 
+        [(ngModel)]="comment" value="" name = "commentContent" style="background:#333333;">
+    <div class="fb-form__field flex-row dropdown-field showDropdownField"
+        [ngClass]="{'showDropdownField': visibleDropdownField}">
+        <div class="fb-form__add-image">
+            <input type="file" (change)="onSelectFile($event)" name="upload-image" id="upload-image{{uniqueId + '2'}}" hidden="hidden" multiple>
+            <label for="upload-image{{uniqueId + '2'}}">
+                <i class="bi bi-image"></i>
+            </label>
+        </div>
+        <button class="fb-form__button--accent" (click)="onUpdateComment()" >Update</button>
+    </div>
+    <div class="flex-row">
+        <img *ngFor='let preview of myFilesPreview' [src]="preview" width="80px" style="margin: 3px;">
+    </div>
+    <div>
+        <span *ngIf="errImageSize" class = 'error-letter'>The size is greater than 1MB.</span>
+        <span *ngFor="let item of myfileName" class="font-S12">{{item + ' ,'}}</span>
+    </div>
+    <span class = 'error-letter' *ngIf="emptyCommentContent">{{errorLetter}}</span>
+    <span class = 'note-letter-num' *ngIf="!emptyCommentContent" [innerHTML]="safehtmlComment"></span>
+</form>

@@ -1,0 +1,97 @@
+.close-theme-switcher-btn {
+    margin-left: auto;
+    padding: 3px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 300ms, border 300ms, transform 300ms;
+    &:hover {
+        color: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(255, 255, 255, 1);
+        transform: scale(1.1);
+    }
+}
+
+.theme-switcher-wrapper {
+    height: 95%;
+    width: 100%;
+    background-color: transparent;
+    transition: var(--bg-transition);
+    padding: 20px;
+}
+.theme {
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -10px;
+        margin-top: -10px;
+    }
+    &__item {
+        flex-grow: 1;
+        flex-shrink: 0;
+        height: 160px;
+        margin-left: 10px;
+        margin-top: 10px;
+        flex-basis: calc(100% / 3 - 10px);
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        transition: 350ms;
+    }
+    &__item:hover {
+        border: 1px solid #ffffff;
+        box-shadow: 0px 0px 5px #0c0d0d;
+    }
+}
+
+.preview {
+    width: 85%;
+    height: 110px;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    &__wrapper {
+        border: 1px solid #000;
+        padding: 10px 0 10px 60px;
+        height: 128px;
+        border-radius: 10px;
+        background-color: var(--bg1-color);
+    }
+    &__header {
+        flex-grow: 1;
+        flex-shrink: 0;
+        padding: 10px;
+        height: 30%;
+        width: 100%;
+        background-color: var(--bg2-color);
+    }
+    &__text {
+        height: 10px;
+        width: 70px;
+        border-radius: 5px;
+        background-color: var(--main-text-color);
+    }
+    &__body {
+        flex-grow: 1;
+        flex-shrink: 0;
+        height: 70%;
+        width: 100%;
+        background-color: var(--bg3-color);
+    }
+}
+
+input[data-theme] {
+    margin-left: 25px;
+    cursor: pointer;
+}
+label {
+    cursor: pointer;
+}

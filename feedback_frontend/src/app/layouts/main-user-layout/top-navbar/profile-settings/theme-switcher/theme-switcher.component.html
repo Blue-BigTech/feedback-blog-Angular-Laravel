@@ -1,0 +1,387 @@
+<div class="themes-wrapper">
+
+  <div class="title-block">
+    <div class="theme-category">
+
+      <span>Themes & Colors</span>
+    </div>
+  </div>
+
+  <div class="theme-group">
+    <form class="theme-switcher-form" name="theme-switcher">
+      <div class="pp__form-field">
+        <div class="pp__form-label-box">
+          <h4 class="pp__form-label">Light</h4>
+        </div>
+
+        <!-- select ----- -->
+        <div class="pp__form-select-wrapper">
+          <span class="pp__select-arrow-pointer">
+            <!-- <i class="bi bi-chevron-down"></i> -->
+            <i class="bi bi-caret-up-fill"></i>
+            <i class="bi bi-caret-down-fill"></i>
+          </span>
+
+          <button class="pp__form-select-btn" type="button" id="dropdownSplitOptions" data-bs-toggle="dropdown"
+            aria-expanded="false">{{lightThemeName}}</button>
+
+          <ul class="dropdown-menu pp__select-menu" aria-labelledby="dropdownSplitOptions">
+            <li class="pp__select-item" tabindex="-1">
+              <i class="bi bi-arrow-down-up"></i>
+              Use up&dowm arrows to preview
+            </li>
+            <li class="pp__select-item" (click)="chooseLightTheme(theme)"
+              [ngClass]="{'activeItem': lightTheme === theme.value}" *ngFor="let theme of themesLightList">
+              <span>{{theme.name}}</span>
+            </li>
+
+          </ul>
+        </div>
+        <!-- end select ----- -->
+      </div>
+      <div class="pp__form-field dark">
+        <div class="pp__form-label-box">
+          <h4 class="pp__form-label">Dark</h4>
+        </div>
+
+        <!-- select ----- -->
+        <div class="pp__form-select-wrapper">
+          <span class="pp__select-arrow-pointer">
+            <!-- <i class="bi bi-chevron-down"></i> -->
+            <i class="bi bi-caret-up-fill"></i>
+            <i class="bi bi-caret-down-fill"></i>
+          </span>
+
+          <button class="pp__form-select-btn" type="button" id="dropdownSplitOptions" data-bs-toggle="dropdown"
+            aria-expanded="false">{{darkThemeName}}</button>
+
+          <ul class="dropdown-menu pp__select-menu" aria-labelledby="dropdownSplitOptions">
+            <li class="pp__select-item" tabindex="-1">
+              <i class="bi bi-arrow-down-up"></i>
+              Use up&dowm arrows to preview
+            </li>
+            <li class="pp__select-item" (click)="chooseDarkTheme(theme)"
+              [ngClass]="{'activeItem': darkTheme === theme.value}" *ngFor="let theme of themesDarkList">
+              <span>{{theme.name}}</span>
+            </li>
+
+          </ul>
+        </div>
+        <!-- end select ----- -->
+
+      </div>
+
+    </form>
+  </div>
+
+  <!--
+  Previous version of theme switcher
+  <div class="title-block">
+    <div class="theme-category">
+
+      <span>Light Theme</span>
+    </div>
+  </div>
+
+  <div class="theme-group">
+    <div class="theme-items-flex-container">
+
+      <div class="theme-item">
+        <label class="form-check-label" (click)="change('atom-theme', 'light')" for="LightAtomTheme"
+          [ngClass]="{'activeTheme': lightTheme == 'AtomLight'}">
+          <div class="atom-theme-light theme-card">
+            <div class="c-header">
+              <div class="left-menu">
+                <div class="top-menu-item-logo"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+              </div>
+              <div class="right-menu">
+                <div class="top-menu-item"></div>
+              </div>
+            </div>
+            <div class="c-body">
+              <div class="leftsidebar">
+                <div class="leftside-menu">
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="bottomleftside-menu">
+                    <div class="leftside-menu-item"></div>
+                    <div class="leftside-menu-item"></div>
+                  </div>
+                </div>
+                <div class="leftside-collapse"></div>
+              </div>
+              <div class="tabsbody">
+                <div class="tabs-menu"></div>
+                <div class="split-container"></div>
+              </div>
+            </div>
+            <div class="c-footer"></div>
+          </div>
+          <div class="c-checkbox">
+            <div class="form-check">
+              <input class="form-check-input visually-hidden" type="radio" value="AtomLight" [(ngModel)]="lightTheme"
+                id="LightAtomTheme">
+              <label class="form-check-input-label" for="LightAtomTheme">
+                Atom
+              </label>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div class="theme-item">
+        <label class="form-check-label" (click)="change('solarized-theme', 'light')" for="LightSolarizedTheme"
+          [ngClass]="{'activeTheme': lightTheme == 'SolarizedLight'}">
+          <div class="solarized-theme-light theme-card">
+            <div class="c-header">
+              <div class="left-menu">
+                <div class="top-menu-item-logo"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+              </div>
+              <div class="right-menu">
+                <div class="top-menu-item"></div>
+              </div>
+            </div>
+            <div class="c-body">
+              <div class="leftsidebar">
+                <div class="leftside-menu">
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="bottomleftside-menu">
+                    <div class="leftside-menu-item"></div>
+                    <div class="leftside-menu-item"></div>
+                  </div>
+                </div>
+                <div class="leftside-collapse"></div>
+              </div>
+              <div class="tabsbody">
+                <div class="tabs-menu"></div>
+                <div class="split-container"></div>
+              </div>
+            </div>
+            <div class="c-footer"></div>
+          </div>
+          <div class="c-checkbox">
+            <div class="form-check">
+              <input class="form-check-input visually-hidden" type="radio" value="SolarizedLight"
+                [(ngModel)]="lightTheme" id="LightSolarizedTheme">
+              <label class="form-check-input-label" for="LightSolarizedTheme">
+                Solarized
+              </label>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div class="theme-item">
+        <label class="form-check-label" (click)="change('tokyo-theme', 'light')" for="LightTokioTheme"
+          [ngClass]="{'activeTheme': lightTheme == 'TokyoLight'}">
+          <div class="tokyo-theme-light theme-card">
+            <div class="c-header">
+              <div class="left-menu">
+                <div class="top-menu-item-logo"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+              </div>
+              <div class="right-menu">
+                <div class="top-menu-item"></div>
+              </div>
+            </div>
+            <div class="c-body">
+              <div class="leftsidebar">
+                <div class="leftside-menu">
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="bottomleftside-menu">
+                    <div class="leftside-menu-item"></div>
+                    <div class="leftside-menu-item"></div>
+                  </div>
+                </div>
+                <div class="leftside-collapse"></div>
+              </div>
+              <div class="tabsbody">
+                <div class="tabs-menu"></div>
+                <div class="split-container"></div>
+              </div>
+            </div>
+            <div class="c-footer"></div>
+          </div>
+          <div class="c-checkbox">
+            <div class="form-check">
+              <input class="form-check-input visually-hidden" type="radio" value="TokyoLight" [(ngModel)]="lightTheme"
+                id="LightTokioTheme">
+              <label class="form-check-input-label" for="LightTokioTheme">
+                Tokio
+              </label>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="title-block">
+    <div class="theme-category">
+      <span>Dark Theme</span>
+    </div>
+  </div>
+
+  <div class="theme-group">
+    <div class="theme-items-flex-container">
+
+      <div class="theme-item">
+        <label class="form-check-label" (click)="change('atom-theme', 'dark')" for="DarkAtomTheme"
+          [ngClass]="{'activeTheme': darkTheme == 'AtomDark'}">
+          <div class="atom-theme-dark theme-card">
+            <div class="c-header">
+              <div class="left-menu">
+                <div class="top-menu-item-logo"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+              </div>
+              <div class="right-menu">
+                <div class="top-menu-item"></div>
+              </div>
+            </div>
+            <div class="c-body">
+              <div class="leftsidebar">
+                <div class="leftside-menu">
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="bottomleftside-menu">
+                    <div class="leftside-menu-item"></div>
+                    <div class="leftside-menu-item"></div>
+                  </div>
+                </div>
+                <div class="leftside-collapse"></div>
+              </div>
+              <div class="tabsbody">
+                <div class="tabs-menu"></div>
+                <div class="split-container"></div>
+              </div>
+            </div>
+            <div class="c-footer"></div>
+          </div>
+          <div class="c-checkbox">
+            <div class="form-check">
+              <input class="form-check-input visually-hidden" type="radio" value="AtomDark" [(ngModel)]="darkTheme"
+                id="DarkAtomTheme">
+              <label class="form-check-input-label" for="DarkAtomTheme">
+                Atom
+              </label>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div class="theme-item">
+        <label class="form-check-label" (click)="change('solarized-theme', 'dark')" for="DarkSolarizedTheme"
+          [ngClass]="{'activeTheme': darkTheme == 'SolarizedDark'}">
+          <div class="solarized-theme-dark theme-card">
+            <div class="c-header">
+              <div class="left-menu">
+                <div class="top-menu-item-logo"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+              </div>
+              <div class="right-menu">
+                <div class="top-menu-item"></div>
+              </div>
+            </div>
+            <div class="c-body">
+              <div class="leftsidebar">
+                <div class="leftside-menu">
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="bottomleftside-menu">
+                    <div class="leftside-menu-item"></div>
+                    <div class="leftside-menu-item"></div>
+                  </div>
+                </div>
+                <div class="leftside-collapse"></div>
+              </div>
+              <div class="tabsbody">
+                <div class="tabs-menu"></div>
+                <div class="split-container"></div>
+              </div>
+            </div>
+            <div class="c-footer"></div>
+          </div>
+          <div class="c-checkbox">
+            <div class="form-check">
+              <input class="form-check-input visually-hidden" type="radio" value="SolarizedDark" [(ngModel)]="darkTheme"
+                id="DarkSolarizedTheme">
+              <label class="form-check-input-label" for="DarkSolarizedTheme">
+                Solarized
+              </label>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div class="theme-item">
+        <label class="form-check-label" (click)="change('tokyo-theme', 'dark')" for="DarkTokioTheme"
+          [ngClass]="{'activeTheme': darkTheme == 'TokyoDark'}">
+          <div class="tokyo-theme-dark theme-card">
+            <div class="c-header">
+              <div class="left-menu">
+                <div class="top-menu-item-logo"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+                <div class="top-menu-item"></div>
+              </div>
+              <div class="right-menu">
+                <div class="top-menu-item"></div>
+              </div>
+            </div>
+            <div class="c-body">
+              <div class="leftsidebar">
+                <div class="leftside-menu">
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="leftside-menu-item"></div>
+                  <div class="bottomleftside-menu">
+                    <div class="leftside-menu-item"></div>
+                    <div class="leftside-menu-item"></div>
+                  </div>
+                </div>
+                <div class="leftside-collapse"></div>
+              </div>
+              <div class="tabsbody">
+                <div class="tabs-menu"></div>
+                <div class="split-container"></div>
+              </div>
+            </div>
+            <div class="c-footer"></div>
+          </div>
+          <div class="c-checkbox">
+            <div class="form-check f-wrap">
+              <input class="form-check-input visually-hidden" type="radio" value="TokyoDark" [(ngModel)]="darkTheme"
+                id="DarkTokioTheme">
+              <label class="form-check-input-label" for="DarkTokioTheme">
+                Tokyo
+              </label>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+-->
+
+</div>

@@ -1,0 +1,81 @@
+<div class="feedback-wrapper">
+    <div class="fb-posts">
+        <div class="fb-posts__header">
+            <h2 class="fb-posts__title">
+                <span>Showing</span>
+                <!-- -------- select --------- -->
+                <div class="fb-posts__select">
+
+                    <button class="select-btn" type="button" id="dropdownSplitOptions" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <span>{{sortType}}</span>
+                        <span class="select-arrow-pointer">
+                            <!-- <i class="bi bi-caret-down"></i> -->
+                            <i class="bi bi-caret-up-fill"></i>
+                            <i class="bi bi-caret-down-fill"></i>
+                        </span>
+                    </button>
+
+                    <div class="dropdown-menu select-menu" aria-labelledby="dropdownSplitOptions"
+                        style="display: flex;">
+                        <ul class="select-submenu">
+                            <li class="select-item select-item__title">Sort</li>
+                            <li class="select-item" (click)="chooseSortType(item)"
+                                [ngClass]="{'activeItem': sortType === item}" *ngFor="let item of sortTypes">
+                                {{item}}
+                            </li>
+                        </ul>
+
+                        <ul class="select-submenu">
+                            <li class="select-item select-item__title">Filter</li>
+                            <li class="select-item" (click)="chooseSortType(item)"
+                                [ngClass]="{'activeItem': sortType === item}" *ngFor="let item of filterTypes">
+                                {{item}}
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- -------- end select --------- -->
+                <span>posts</span>
+            </h2>
+
+            <div style="position: relative;">
+                <button class="fb-posts__notification-btn" type="button" id="dropdownNotification1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-bell-fill"></i>
+                </button>
+
+                <div class="dropdown-menu notify-select-menu" aria-labelledby="dropdownNotification1">
+                    You have no notifications.
+                </div>
+            </div>
+        </div>
+        <div class="fb-posts__content" *ngIf="data.allCommentsVisible">
+
+            <!-- --- start post item ----- -->
+            <div class="fb-posts__post" *ngFor="let item of data.returnNComments(2)">
+                <div class="fb-posts__post-votes">
+                    <i class="bi bi-caret-up-fill"></i>
+                    <span class="votes-count">{{item.votes}}</span>
+                </div>
+                <a class="fb-posts__post-link" (click)="data.openSubcomments(item.id)">
+                    <div class="fb-posts__post-body">
+                        <h4 class="fb-posts__post-title">{{item.title}}</h4>
+                        <p class="fb-posts__post-type">{{item.status}}</p>
+                        <p class="fb-posts__post-details">{{item.text}}</p>
+                    </div>
+                    <div class="fb-posts__post-comments">
+                        <i class="bi bi-chat-left-text"></i>
+                        <span class="comments-counter">{{item.countSubcomments}}</span>
+                    </div>
+                </a>
+            </div>
+            <!-- --- end post item ----- -->
+
+            <!-- for subcomment component -->
+            <app-comment *ngIf="!data.allCommentsVisible"></app-comment>
+
+        </div>
+    </div>
+</div>

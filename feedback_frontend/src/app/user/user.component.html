@@ -1,0 +1,23 @@
+<as-split id="splitContainer"
+        [direction]="'horizontal'"
+        [unit]="'percent'"
+        >
+
+
+          <as-split-area
+           [size]="50"
+           [minSize]="220"
+           id="firstSplitArea"
+          >
+            <router-outlet [id]="masterArray"></router-outlet>
+          </as-split-area>
+
+
+          <as-split-area
+          [size]="50"
+           [minSize]="220"
+           id="firstSplitArea"
+          >
+            <router-outlet [id]="masterArray"></router-outlet>
+          </as-split-area>
+        </as-split>

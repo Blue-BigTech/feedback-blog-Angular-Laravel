@@ -1,0 +1,51 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+img {
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+button {
+  border: none;
+  outline: none;
+}
+
+body {
+  font-family: "Inter", "Arial", "Helvetica Neue", "Helvetica", sans-serif;
+  font-weight: 400;
+  color: #000;
+  background-color: var(--main-text-color);
+
+  &.is-full-screen {
+    padding-top: 0px;
+  }
+}
+.dn {
+  display: none !important;
+}
+div,
+h1,
+p {
+  color: var(--main-text-color);
+}
+li {
+  color: #000;
+}
+.theme__list label {
+  color: var(--main-text-color);
+}

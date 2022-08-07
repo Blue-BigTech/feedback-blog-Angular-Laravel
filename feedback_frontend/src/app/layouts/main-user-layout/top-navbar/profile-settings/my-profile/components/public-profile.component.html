@@ -1,0 +1,68 @@
+<!--<h3 class="profile-info__form-title">Public Profile</h3>-->
+<form class="profile-info__form" autocomplete="off">
+    <div class="profile-info__form-field">
+        <div class="profile-info__form-label-box">
+            <h4 class="profile-info__form-label">Display Name</h4>
+        </div>
+        <input class="profile-info__form-input" type="text">
+    </div>
+
+    <div class="profile-info__form-field h-centered">
+        <div class="profile-info__form-label-box">
+            <h4 class="profile-info__form-label">Profile Image</h4>
+        </div>
+
+        <div class="avatar-container">
+          <div class="profile-avatar-box">
+            <div class="avatar-placeholder" *ngIf="user.avatar === null || user.avatar === ''">
+              <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                width="70.000000pt" height="70.000000pt" viewBox="0 0 512.000000 512.000000"
+                preserveAspectRatio="xMidYMid meet">
+
+                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)">
+                <path d="M2325 5106 c-140 -35 -337 -156 -470 -291 -100 -100 -154 -184 -188
+                -290 -19 -61 -22 -91 -21 -230 0 -95 8 -208 18 -278 l17 -118 -30 -35 c-39
+                -43 -45 -70 -37 -148 9 -91 42 -199 86 -286 22 -42 40 -82 40 -89 0 -29 71
+                -224 111 -302 65 -131 134 -226 238 -330 149 -149 280 -216 441 -226 329 -21
+                658 289 809 760 17 53 31 102 31 109 0 6 18 47 40 90 50 97 80 210 80 308 0
+                71 -2 76 -34 110 l-34 35 15 85 c20 125 29 429 13 498 -28 129 -120 243 -284
+                354 -165 110 -437 229 -615 269 -98 21 -155 23 -226 5z"/>
+                <path d="M1964 2569 c-35 -39 -221 -155 -358 -224 -134 -67 -188 -90 -436
+                -185 -137 -52 -216 -99 -307 -184 -93 -87 -148 -164 -212 -296 -113 -234 -160
+                -535 -140 -886 11 -209 52 -456 80 -490 26 -31 308 -122 521 -168 422 -91 859
+                -131 1448 -131 602 0 1063 44 1486 140 207 47 459 130 483 159 12 14 46 169
+                61 276 31 218 29 534 -5 729 -46 267 -159 505 -307 647 -119 115 -184 152
+                -418 238 -266 98 -629 292 -704 374 l-18 21 -67 -56 c-347 -295 -668 -297
+                -1014 -7 -73 61 -76 62 -93 43z"/>
+                </g>
+              </svg>
+            </div>
+
+            <img src="{{folepath}}profileAvatars/{{user.avatar}}" alt="" class="avatar" *ngIf="user.avatar !== null && user.avatar !== ''">
+          </div>
+          <input type="file" id="uploadImage" style="display: none" (change)="onFileSelected($event)">
+          <label class="upload-avatar-btn" for="uploadImage">
+              <i class="bi bi-image"></i>
+          </label>
+        </div>
+        <!--<div class="profile-info__user-profile-image">
+        </div>-->
+    </div>
+
+    <!--<div class="profile-info__form-field">
+        <div class="profile-info__form-label-box">
+            <h4 class="profile-info__form-label">Change Profile Image</h4>
+        </div>
+
+
+        <div class="fb-form__add-image">
+            <input type="file" name="upload-image" id="upload-image" hidden="hidden">
+            <label for="upload-image">
+                <i class="bi bi-image"></i>
+            </label>
+        </div>
+
+    </div>-->
+
+    <button class="profile-info__form-submit-btn ml-auto" type="submit" disabled>Saved</button>
+</form>

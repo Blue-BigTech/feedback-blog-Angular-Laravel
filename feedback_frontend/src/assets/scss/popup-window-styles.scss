@@ -1,0 +1,203 @@
+//  pw - popup window ==============================================================
+
+.pw {
+  &__wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(1.15);
+
+    transition: 150ms ease-in;
+
+    &.is-visible {
+      pointer-events: all;
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  &__left-side {
+    width: 300px;
+
+    flex: 1 0 300px;
+
+    height: 100%;
+    overflow: hidden;
+
+    background-color: var(--bottom-nav-bg);
+
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__left-side-content {
+    width: 300px;
+    height: 100%;
+    padding: 50px 25px 50px 10px;
+
+    transform-origin: center right;
+
+    transition: transform 150ms ease-in;
+  }
+  &__right-side {
+    width: 726px;
+
+    flex: 1 0 726px;
+
+    background-color: var(--main-area-bg);
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    overflow: hidden;
+    overflow-y: scroll;
+
+    &:hover::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    &::-webkit-scrollbar {
+      width: 10px;
+      background: transparent;
+      border-radius: 0px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 0px;
+    }
+  }
+  &__right-side-content {
+    width: 650px;
+    padding: 50px 0px 50px 40px;
+
+    transform-origin: center left;
+
+    transition: transform 150ms ease-in;
+  }
+
+  &__close-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: sticky;
+    top: 0;
+    margin-left: 150px;
+    cursor: pointer;
+
+    color: var(--secondary-color);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 2px solid var(--secondary-color);
+    outline: none;
+    background-color: transparent;
+
+    transition: 150ms ease-in;
+
+    &::after {
+      display: block;
+      content: "ESC";
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    &.is-visible {
+      top: 50px;
+      margin-left: 40px;
+    }
+  }
+
+  &__title {
+    text-transform: uppercase;
+    color: #96989d;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    margin: 0;
+    margin-bottom: 9px;
+  }
+  &__subtitle {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    text-transform: capitalize;
+
+    border-bottom: 1px solid var(--divider-color);
+  }
+  &__divider {
+    height: 0px;
+    width: 100%;
+    border-top: 1px solid var(--divider-color);
+    margin: 15px 0;
+  }
+  &__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: -10px;
+    // padding-bottom: 15px;
+    // margin-bottom: 15px;
+    // border-bottom: 1px solid var(--dropdown-border);
+  }
+  &__nav-item {
+    &:not(:last-child) {
+      margin-bottom: 3px;
+    }
+  }
+  &__nav-link {
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--secondary-color);
+    background-color: transparent;
+    text-decoration: none;
+    border-radius: 4px;
+
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    transition: 300ms;
+    & > span {
+      // margin-left: 10px;
+    }
+    &:hover {
+      // background-color: var(--hover-link-bg);
+      background-color: var(--hover-link-bg-2);
+      color: var(--main-color);
+      text-decoration: none;
+    }
+    &.activeLink {
+      background-color: var(--hover-link-bg);
+      color: var(--main-color);
+      &:hover {
+        background-color: var(--hover-link-bg);
+      }
+    }
+    &.right-icon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}

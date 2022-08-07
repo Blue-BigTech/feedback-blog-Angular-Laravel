@@ -1,0 +1,51 @@
+mwlResizable {
+  box-sizing: border-box;
+}
+
+.rectangle {
+  position: relative;
+  top: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  min-width: 180px;
+  height: 150px;
+  margin: auto;
+  border-radius: 0;
+  font-size: 25px;
+  font-weight: bold;
+  background: #2e00d6;
+  overflow: hidden;
+  padding: 12px;
+}
+.resize-handle-top,
+.resize-handle-bottom {
+  position: absolute;
+  height: 5px;
+  cursor: row-resize;
+  width: 100%;
+}
+.resize-handle-top {
+  top: 0;
+}
+.resize-handle-bottom {
+  bottom: 0;
+}
+.resize-handle-left,
+.resize-handle-right {
+  position: absolute;
+  height: 100%;
+  cursor: col-resize;
+  width: 5px;
+  background: transparent;
+  &:hover {
+    background: #fff;
+  }
+}
+.resize-handle-left {
+  left: 0;
+}
+.resize-handle-right {
+  right: 0;
+}

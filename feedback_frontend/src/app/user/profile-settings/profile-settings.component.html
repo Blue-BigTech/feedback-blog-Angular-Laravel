@@ -1,0 +1,25 @@
+
+  <div class="features-container inv-d-flex">
+    <div class="features-list">
+      <h4 class="card-title text-center my-1">Companies</h4>
+      <div class="feature-item" *ngFor="let f of companies; let i = index" [ngClass]="{'activeFeature': selectedCompanie._id.$oid === f._id.$oid}" (click)="displayDetails(f._id.$oid)">
+        <h5 class="card-title">{{f.name}}</h5>
+
+        <label class="switch">
+          <input type="checkbox" [checked]="f.status" (change)="test(f.title)">
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+    <div class="feature-details">
+      <h4 class="card-title pl-3">{{selectedCompanie?.name}}</h4>
+      <p class="parag p-3">
+        {{selectedCompanie?.description}}
+      </p>
+      <!--<div *ngFor="let d of featuredetails">
+        <h4 class="card-title-sm">{{d?.title}}</h4>
+        <p class="">{{d?.description}}</p>
+      </div>-->
+    </div>
+  </div>
+

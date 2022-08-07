@@ -1,0 +1,60 @@
+<div [ngClass]="{
+  'atom-theme-dark': selectedDarkTheme === 'atom-theme' && selectedThemeMode === 'dark',
+  'atom-v2': selectedDarkTheme === 'atom-theme-2' && selectedThemeMode === 'dark',
+  'atom-theme-light': selectedLightTheme === 'atom-theme' && selectedThemeMode === 'light',
+  'solarized-theme-dark': selectedDarkTheme === 'solarized-theme' && selectedThemeMode === 'dark',
+  'solarized-theme-light': selectedLightTheme === 'solarized-theme' && selectedThemeMode === 'light',
+  'tokyo-theme-dark': selectedDarkTheme === 'tokyo-theme' && selectedThemeMode === 'dark',
+  'tokyo-theme-light': selectedLightTheme === 'tokyo-theme' && selectedThemeMode === 'light'}">
+
+  <div class="inv-top-Navbar">
+    <app-top-navbar></app-top-navbar>
+  </div>
+
+  <div class="inv-main-layout">
+    <div class="inv-left-side">
+      <app-left-sidebar></app-left-sidebar>
+    </div>
+    <div class="news-container" *ngIf="newsCollapsed">
+      <app-news></app-news>
+    </div>
+    <div class="inv-body"
+      [ngClass]="{'is-hide': popupsService.visibleFeedbackWindow || popupsService.visibleProfileWindow, 'topLeftRadius': !newsCollapsed}">
+      <as-split #split direction="horizontal" [unit]="'pixel'" class="outer-splitter" (dragStart)="onDragStart(0, $event)">
+        <as-split-area [size]="0" [minSize]="0">
+          <div class="split-dash">
+            <div class="dash-container p-3">
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil similique labore eligendi ipsa nam cum, aliquam provident repellat odio perferendis veniam. Sequi cum veritatis impedit magni cupiditate. Consequuntur, suscipit optio.
+              </p>
+            </div>
+          </div>
+        </as-split-area>
+        <as-split-area style="position: relative; overflow: visible; margin-left: -2px;">
+          <div class="inv-main-body" [ngClass]="{'pl-5': hideleftbox}">
+            <app-splitted-area></app-splitted-area>
+          </div>
+        </as-split-area>
+      </as-split>
+    </div>
+
+
+
+
+
+
+
+
+    <!--<div class="right-side">
+      <app-right-sidebar></app-right-sidebar>
+    </div>-->
+
+    <!-- Feedback Window -->
+    <app-feedback-window></app-feedback-window>
+
+    <!-- Profile Window -->
+    <app-profile-window></app-profile-window>
+  </div>
+
+  <div class="inv-bottom-footer"></div>
+</div>

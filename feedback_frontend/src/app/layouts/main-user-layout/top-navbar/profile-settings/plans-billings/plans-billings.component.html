@@ -1,0 +1,88 @@
+<div class="billings__wrapper">
+    <h3 class="billings__title">Personal billing</h3>
+    <div class="billings__box">
+        <div class="billings__flex-container">
+
+            <div class="billings__card">
+                <h4 class="billings__card-title">Current monthly bill</h4>
+                <div class="billings__card-price"><span>{{plansService.currentPlanPrice}}</span> $</div>
+                <a href="#" class="billings__card-link">Switch to yearly billing</a>
+            </div>
+
+            <div class="billings__card">
+                <h4 class="billings__card-title">Next payment due</h4>
+                <div class="billings__card-price">
+                    <i class="bi bi-dash-lg"></i>
+                </div>
+                <a class="billings__card-link" (click)="showPaymentHistory()">View payment history</a>
+            </div>
+
+            <div class="billings__card">
+                <h4 class="billings__card-title">
+                    Payment information
+                </h4>
+                <a class="billings__card-link" (click)="showPaymentInformation()">Update payment method</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="current-plan-wrapper" *ngIf="default">
+        <div class="billings__plan-header">
+            <h3 class="billings__title">Manage Current Plan</h3>
+            <div class="billings__plan-buttons">
+                <button class="billings__plan-btn" type="button"
+                    (click)="serv.activeProfileButton = 'all-plans'">Compare all
+                    plans</button>
+                <button class="billings__plan-btn billings__plan-btn--accent" type="button">Upgrade</button>
+            </div>
+        </div>
+        <div class="billings__box plan-box">
+            <div class="billings__plan-card">
+                <div class="billings__plan-type-header">
+                    <div class="billings__plan-logo"></div>
+                    <div class="billings__plan-name-wrapper">
+                        <h4 class="billings__plan-name">Plan: <span>{{plansService.currentPlan}}</span></h4>
+                        <p class="billings__card-link">Manage</p>
+                    </div>
+                    <div class="billings__plan-info">
+                        <div class="billings__plan-numbers">
+                            <span class="billings__plan-additional-unlocks">5</span>
+                            <span class="billings__plan-numbers-icon billings__plan-numbers-icon--small">
+                                <div style="display: flex;">
+                                    <span class="additional-unlocks">Additional Unlocks</span>
+                                    <i class="bi bi-info-circle"
+                                        ngbTooltip="Number of unlocks that are not included in your plan!"
+                                        [openDelay]="500" tooltipClass="email-verified-tooltip" placement="bottom"
+                                        [closeDelay]="500" style="color: var(--main-color);"></i>
+                                    <!--<i class="bi bi-info-circle" style="position: relative;">
+                                        <div class="own-tooltip">Number of unlocks that are not included in your plan
+                                        </div>
+                                    </i>-->
+                                </div>
+                                <p class="billings__card-link">Manage</p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="billings__plan-type-body">
+                    <div class="billings__inner-card-title">Unlocked Companies</div>
+                    <ul class="plan-features-list">
+                        <li class="plan-features-item">
+                            <i class="bi bi-check"></i>
+                            <span>lorem ipsum 1</span>
+                        </li>
+                        <li class="plan-features-item">
+                            <i class="bi bi-check"></i>
+                            <span>lorem ipsum 2</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

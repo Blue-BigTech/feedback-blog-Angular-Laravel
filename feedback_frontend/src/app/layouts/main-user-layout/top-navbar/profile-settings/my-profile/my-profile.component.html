@@ -1,0 +1,233 @@
+<div class="profile-info__wrapper">
+
+  <h3 class="profile-info__form-title">My Information</h3>
+  <form class="profile-info__form" [formGroup]="infoForm" autocomplete="off">
+    <div class="profile-info__form-field">
+      <div class="profile-info__form-label-box">
+        <h4 class="profile-info__form-label">First Name</h4>
+      </div>
+      <input class="profile-info__form-input" type="text" (keyup)="profileInfoChanges()" formControlName="first_name">
+    </div>
+    <div class="profile-info__form-field">
+      <div class="profile-info__form-label-box">
+        <h4 class="profile-info__form-label">Last Name</h4>
+      </div>
+      <input class="profile-info__form-input" type="text" (keyup)="profileInfoChanges()" formControlName="last_name">
+    </div>
+    <div class="profile-info__form-field">
+      <div class="profile-info__form-label-box">
+        <h4 class="profile-info__form-label">Workplace</h4>
+        <h5 class="profile-info__form-sublabel">Tell us what type of work you are in</h5>
+      </div>
+
+      <div class="billings__form-select-wrapper">
+        <span class="select-arrow-pointer">
+          <!-- <i class="bi bi-chevron-down"></i> -->
+          <i class="bi bi-caret-up-fill"></i>
+          <i class="bi bi-caret-down-fill"></i>
+        </span>
+
+        <button class="billings__form-select-btn" type="button" id="dropdownSplitOptions" data-bs-toggle="dropdown"
+          aria-expanded="false">{{infoForm.value.workType}}</button>
+
+        <ul class="dropdown-menu profile-info__select-menu" aria-labelledby="dropdownSplitOptions">
+          <li class="profile-select-item" (click)="chooseWorkType(opt)"
+            [ngClass]="{'activeItem': opt === infoForm.value.workType}" *ngFor="let opt of workTypes">
+            <span>{{opt}}</span>
+          </li>
+
+        </ul>
+      </div>
+
+      <!--<p-dropdown [options]="workTypes" formControlName="workType" placeholder="Select your Work Type" [showClear]="true"></p-dropdown>-->
+    </div>
+    <button class="profile-info__form-submit-btn ml-auto" type="submit" *ngIf="!profileInfoSaved"
+      disabled>Saved</button>
+    <button type="button" class="profile-info__form-submit-btn ml-auto" *ngIf="profileInfoSaved"
+      (click)="updateProfileInfo()">Save</button>
+  </form>
+
+  <h3 class="profile-info__form-title">Account Email</h3>
+  <div class="profile-info__form">
+    <form [formGroup]="emaildataInit" style="width: 100% !important;" *ngIf="!requestUpdateEmailBool"
+      name="account-email-form" autocomplete="off">
+      <div class="profile-info__form-field">
+        <div class="profile-info__form-label-box">
+          <h4 class="profile-info__form-label">
+            Email Address
+            <i class="bi bi-patch-check-fill" ngbTooltip="This user's email has been verified!"
+              *ngIf="user.email_verif_status" [openDelay]="500" tooltipClass="email-verified-tooltip" placement="bottom"
+              [closeDelay]="500" style="color: var(--success-bg);"></i>
+          </h4>
+          <h5 class="profile-info__form-sublabel">Your email is used as your login name</h5>
+        </div>
+        <input class="profile-info__form-input" (keyup)="emailChange()" formControlName="email" type="email">
+      </div>
+      <div class="mt-2 text-end">
+        <button class="profile-info__form-submit-btn ml-auto" type="button" [disabled]="!emailChanged || submitting"
+          (click)="requestUpdateEmail()">
+          <div *ngIf="submitting" class="spinner-border spinner-border-sm mr-2 text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          Update Email
+        </button>
+      </div>
+    </form>
+    <form [formGroup]="emaildataChange" style="width: 100% !important;" *ngIf="requestUpdateEmailBool"
+      name="account-email-form" autocomplete="off">
+      <div class="profile-info__form-field">
+        <div class="profile-info__form-label-box">
+          <h4 class="profile-info__form-label">
+            Email Address
+            <i class="bi bi-patch-check-fill" ngbTooltip="This user's email has been verified!" [openDelay]="500"
+              tooltipClass="email-verified-tooltip" placement="bottom" [closeDelay]="500"
+              style="color: var(--success-bg);"></i>
+          </h4>
+          <!--<h5 class="profile-info__form-sublabel">Your email is used as your login name</h5>-->
+        </div>
+        <input class="profile-info__form-input" formControlName="email" type="email">
+      </div>
+      <div class="profile-info__form-field">
+        <div class="profile-info__form-label-box">
+          <h4 class="profile-info__form-label">
+            Verification Code
+          </h4>
+          <h5 class="profile-info__form-sublabel">We just sent a confirmation code over to
+            {{emaildataChange.value.email}}<strong></strong></h5>
+        </div>
+        <!--<input class="profile-info__form-input" formControlName="code" type="email">-->
+        <code-input class="mx-auto" style="max-width: 350px !important;" [isCodeHidden]="false" [codeLength]="6"
+          (codeCompleted)="onCodeCompleted($event)">
+        </code-input>
+      </div>
+
+      <div class="d-flex justify-content-between mt-2 ml-auto" style="width: 60%;">
+        <span class="error-text" *ngIf="emailChangeError !== ''"><i class="bi bi-x-circle-fill"></i>
+          {{emailChangeError}}</span>
+        <span class="success-text" *ngIf="successMessage[1] !== ''"><i class="bi bi-check-circle-fill"></i>
+          {{successMessage[1]}}</span>
+
+        <button class="unified_btn ml-auto" type="button" [disabled]="submitting" (click)="UpdateEmail()">
+          <div *ngIf="submitting" class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          Save Email
+        </button>
+      </div>
+    </form>
+
+
+    <div class="verif-email-request-box justify-content-center" *ngIf="!user.email_verif_status && !requestVerifEmail">
+      <hr class="col-8 mx-auto">
+      <div class="verify-email-icon text-center">
+        <i class="fas fa-envelope-open-text"></i>
+      </div>
+      <h4 class="text-center">Verify your email</h4>
+      <p class="text-center">Almost there! We've sent a verification email to <strong>{{user?.email}}</strong>.</p>
+      <p class="text-center">Check it or click the button bellow to resend the email!</p>
+      <div class="text-center mt-3">
+        <button class="unified_btn" (click)="resendVerifEmail()">Resend email</button>
+      </div>
+
+    </div>
+
+    <div class="verif-email-request-box justify-content-center" *ngIf="!user.email_verif_status && requestVerifEmail">
+      <hr class="col-8 mx-auto">
+      <div class="verify-email-icon text-center">
+        <i class="fas fa-paper-plane"></i>
+      </div>
+      <h4 class="text-center">Email sent successfully</h4>
+      <p class="text-center">Perfect! Please check your email to verify it.</p>
+      <div class="text-center mt-3">
+        <button class="unified_btn" (click)="emailSent()">OK</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <h3 class="profile-info__form-title">Password Settings</h3>
+  <form class="profile-info__form" name="account-password-form" autocomplete="off" [formGroup]="passwordForm">
+    <div class="profile-info__form-field">
+      <div class="profile-info__form-label-box">
+        <h4 class="profile-info__form-label">Current Password</h4>
+      </div>
+      <input class="profile-info__form-input" type="password" name="profile-current-password"
+        formControlName="password">
+    </div>
+
+    <div class="profile-info__form-field">
+      <div class="profile-info__form-label-box">
+        <h4 class="profile-info__form-label">New Password</h4>
+      </div>
+      <input class="profile-info__form-input" type="password" name="profile-new-password" formControlName="newPassword"
+        (keyup)="verifPasswordInput()" #newPassword>
+    </div>
+
+    <div class="profile-info__form-field">
+      <div class="profile-info__form-label-box">
+        <h4 class="profile-info__form-label">New Password Confirmation</h4>
+      </div>
+      <input class="profile-info__form-input" type="password" name="profile-new-password-confirmation"
+        formControlName="newPasswordConf" (keyup)="verifPasswordInput()" #newPasswordConfirm>
+    </div>
+
+    <div class="profile-info__form-password-verification ml-auto">
+      <p class="profile-info__form-password-verification-text" [ngClass]="{'accepted-password': passwordLength >= 6}">
+        Your password must be 6-40 characters</p>
+      <p class="profile-info__form-password-verification-text" [ngClass]="{'accepted-password': containChar}">Must
+        contain at least 1 letter</p>
+      <p class="profile-info__form-password-verification-text" [ngClass]="{'accepted-password': containDigit}">Must
+        contain at least 1 digit</p>
+      <p class="profile-info__form-password-verification-text" [ngClass]="{'accepted-password': passwordConfirmed}">The
+        new password match confirm password</p>
+    </div>
+
+    <div class="profile-info__form-field">
+      <div class="profile-info__form-label-box">
+
+      </div>
+      <div class="d-flex justify-content-between" style="width: 60%;">
+        <span class="error-text pl-3" *ngIf="passwordError !== ''"><i class="bi bi-x-circle-fill"></i>
+          {{passwordError}}</span>
+        <span class="success-text pl-3" *ngIf="successMessage[2] !== ''"><i class="bi bi-check-circle-fill"></i>
+          {{successMessage[2]}}</span>
+
+        <button class="profile-info__form-submit-btn ml-auto" (click)="updatePassword()"
+          [disabled]="passwordLength <6 || passwordLength > 40 || !containChar  || !containDigit || !passwordConfirmed">Update
+          Password</button>
+      </div>
+    </div>
+
+    <!--<div class="profile-info__form-field ml-auto d-flex justify-content-between">
+          <span class="text-danger">Current password not correct</span>
+          <button class="profile-info__form-submit-btn ml-auto" (click)="updatePassword()" [disabled]="passwordLength <6 || passwordLength > 40 || !containChar  || !containDigit || !passwordConfirmed">Update Password</button>
+        </div>-->
+  </form>
+
+  <h3 class="profile-info__form-title danger">Delete account</h3>
+  <div class="profile-info__form fl-start" name="account-email-form" *ngIf="accountRequests.length === 0">
+    <h5 class="profile-info__form-sublabel">
+      Your account will be deleted permanently after 7 days from your account deletion request.<br>
+      <small>You can cancel the deletion at any moment within the 7 days!</small>
+    </h5>
+
+    <div class="d-flex col-12 mx-0 justify-content-between">
+      <button class="profile-info__form-btn btn-danger" (click)="deleteAccountRequest()" type="button">Delete your
+        account</button>
+    </div>
+  </div>
+  <div class="profile-info__form fl-start" name="account-email-form" *ngIf="accountRequests.length !== 0">
+    <h5 class="profile-info__form-sublabel">
+      Your account will be deleted after <strong>{{delayDeleteAccount}}</strong><br>
+      <small>You can cancel the deletion at any moment before the deadline!</small>
+    </h5>
+
+    <div class="d-flex col-12 mx-0 justify-content-between">
+      <button class="profile-info__form-btn btn-info" (click)="CancelDeleteAccountRequest()" type="button">Cancel
+        Account Deletion</button>
+    </div>
+  </div>
+</div>

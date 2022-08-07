@@ -1,0 +1,112 @@
+<div class="billings__wrapper">
+    <div class="all-plans-wrapper">
+        <div style="display: flex; align-items: center; position: relative;">
+            <h3 class="billings__title">
+                <a class="return-arrow" (click)="returnToBillings()">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+                <span>Plans</span>
+            </h3>
+            <div class="plan-toggle">
+                <span>Annual</span>
+                <input type="checkbox" class="visually-hidden" name="plan-check" id="plan-check"
+                    (change)="changePeriod($event)">
+                <label for="plan-check" class="label-toggle" ngbTooltip="Save up to X% when with an annual plan"
+                    tooltipClass="bootstrap-tooltip-class" placement="top"></label>
+                <span>Monthly</span>
+            </div>
+        </div>
+
+        <div class="billings__box">
+            <p class="billings__card-sublabel billings__card-sublabel--center">Save up to X% with an annual plan</p>
+
+            <div class="billings__flex-container">
+
+                <div class="billings__card billings__plan-card">
+                    <h4 class="billings__plan-title">Small</h4>
+                    <div class="billings__plan-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+                    <div class="billings__plan-price">
+                        <div class="billings__plan-numbers">
+                            <span class="billings__plan-numbers-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </span>
+                            <span class="billings__plan-numbers-total">{{smallPrice}}</span>
+                            <span class="billings__plan-numbers-currency">usd</span>
+                        </div>
+                        <p class="billings__plans-period">{{plansPeriod}}</p>
+                    </div>
+
+                    <ul class="plan-features-list">
+                        <li class="plan-features-item">
+                            <i class="bi bi-check"></i>
+                            <span>lorem ipsum 1</span>
+                        </li>
+                        <li class="plan-features-item">
+                            <i class="bi bi-check"></i>
+                            <span>lorem ipsum 2</span>
+                        </li>
+                    </ul>
+
+                    <button class="billings__plan-btn billings__plan-btn--accent plan" disabled>Upgrade</button>
+                </div>
+
+                <div class="billings__card billings__plan-card">
+                    <h4 class="billings__plan-title">Medium</h4>
+                    <div class="billings__plan-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+                    <div class="billings__plan-price">
+                        <div class="billings__plan-numbers">
+                            <span class="billings__plan-numbers-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </span>
+                            <span class="billings__plan-numbers-total">{{mediumPrice}}</span>
+                            <span class="billings__plan-numbers-currency">usd</span>
+                        </div>
+                        <p class="billings__plans-period">{{plansPeriod}}</p>
+                    </div>
+
+                    <ul class="plan-features-list">
+                        <li class="plan-features-item">
+                            <i class="bi bi-check"></i>
+                            <span>lorem ipsum 1</span>
+                        </li>
+                        <li class="plan-features-item">
+                            <i class="bi bi-check"></i>
+                            <span>lorem ipsum 2</span>
+                        </li>
+                    </ul>
+
+                    <button class="billings__plan-btn billings__plan-btn--accent plan">Upgrade</button>
+                </div>
+
+                <div class="billings__card billings__plan-card">
+                    <h4 class="billings__plan-title">Large</h4>
+                    <div class="billings__plan-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+                    <div class="billings__plan-price">
+                        <div class="billings__plan-numbers">
+                            <span class="billings__plan-numbers-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </span>
+                            <span class="billings__plan-numbers-total">{{largePrice}}</span>
+                            <span class="billings__plan-numbers-currency">usd</span>
+                        </div>
+                        <p class="billings__plans-period">{{plansPeriod}}</p>
+                    </div>
+
+                    <ul class="plan-features-list">
+                        <li class="plan-features-item">
+                            <i class="bi bi-check"></i>
+                            <span>lorem ipsum 1</span>
+                        </li>
+                        <li class="plan-features-item">
+                            <i class="bi bi-check"></i>
+                            <span>lorem ipsum 2</span>
+                        </li>
+                    </ul>
+
+                    <button class="billings__plan-btn billings__plan-btn--accent plan">Upgrade</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

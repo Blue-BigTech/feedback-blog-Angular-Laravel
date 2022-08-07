@@ -1,0 +1,762 @@
+.billings {
+  color: var(--main-color);
+  &__wrapper {
+    // padding: 25px 20px;
+    max-width: 100%;
+  }
+  &__title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--main-color);
+    text-transform: capitalize;
+
+    margin-bottom: 10px;
+
+    display: flex;
+    align-items: center;
+  }
+  &__box {
+    max-width: 100%;
+    border-radius: 6px;
+    // border: 1px solid var(--dropdown-border);
+    background-color: var(--bottom-nav-bg);
+    padding: 30px;
+    margin-bottom: 25px;
+    color: var(--main-color);
+  }
+
+  &__flex-container {
+    max-width: 100%;
+    display: flex;
+    // flex-wrap: wrap;
+    gap: 26px;
+  }
+
+  &__card {
+    flex-basis: calc(100% / 3 - 26px / 3);
+    height: 126px;
+    padding: 26px;
+    border-radius: 6px;
+    // background-color: var(--left-sidebar-bg);
+    background-color: var(--hover-link-bg);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__card-title {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    margin: 0;
+    &--medium {
+      font-size: 14px;
+    }
+    &--large {
+      font-size: 18px;
+    }
+  }
+
+  &__card-price {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+    margin: 0;
+  }
+
+  &__card-link {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--info-bg);
+
+    text-decoration: none;
+    margin: 0;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  &__plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__plan-buttons {
+    display: flex;
+
+    margin-bottom: 10px;
+
+    &.in-form {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__plan-btn {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0 12px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 4px;
+    cursor: pointer;
+
+    background-color: transparent;
+    color: var(--secondary-color);
+    border: 2px solid transparent;
+
+    transition: 400ms;
+
+    &:hover {
+      color: var(--main-color);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:first-child {
+      margin-right: 15px;
+    }
+  }
+
+  &__plan-btn--accent {
+    background-color: transparent;
+    transition: 400ms;
+    color: var(--main-color);
+    &:hover {
+      background-color: var(--accent-color);
+    }
+  }
+
+  // plan-box
+  &__plan-type-header {
+    padding: 30px 30px 15px 30px;
+    border-bottom: 1px solid var(--dropdown-border);
+
+    display: flex;
+    align-items: center;
+  }
+
+  &__plan-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    margin-right: 15px;
+  }
+
+  &__plan-name-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 3px;
+    height: 32px;
+  }
+
+  &__plan-name {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    // margin-bottom: 12px;
+    margin: 0;
+    text-align: left;
+  }
+
+  &__plan-desc {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0;
+  }
+
+  &__plan-type-body {
+    max-width: 100%;
+    padding: 15px 30px 30px 30px;
+  }
+
+  // inner-card
+  &__inner-card {
+    padding: 26px;
+    border-radius: 6px;
+    background-color: var(--left-sidebar-bg);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    position: relative;
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__inner-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+
+    margin: 0;
+    margin-bottom: 25px;
+  }
+  &__inner-form {
+    width: 100%;
+    &.payment-form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  &__form-field-wrapper {
+    width: 100%;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+    &.df {
+      display: flex;
+      gap: 26px;
+    }
+    &.w50 {
+      width: 50%;
+    }
+    &.w75 {
+      width: 75%;
+    }
+    &.card-info-wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 25px;
+      flex-wrap: nowrap;
+      max-width: 580px !important;
+    }
+  }
+
+  &__form-field {
+    width: 100%;
+    &.card-info-field {
+      flex-basis: 25%;
+      flex-grow: 0;
+      &--cvv {
+        flex-basis: 10%;
+      }
+    }
+  }
+
+  &__form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 10px;
+
+    span {
+      margin-right: 3px;
+    }
+    i {
+      font-size: 8px !important;
+      color: #f00;
+    }
+  }
+
+  &__form-input {
+    width: 100%;
+    background-color: var(--main-area-bg); // as all form
+    border: 1px solid var(--input-bg);
+
+    border-radius: 4px;
+    color: var(--main-color);
+    font-size: 13px;
+    font-weight: 500;
+    height: 36px;
+    line-height: 1;
+    overflow: hidden;
+    padding: 0 12px;
+    transition: all 250ms ease-in-out;
+
+    &:hover {
+      border: 1px solid var(--focus-input-border-color);
+      cursor: pointer;
+      outline: none;
+    }
+
+    &:focus {
+      border: 1px solid var(--focus-input-border-color);
+      outline: none;
+    }
+
+    &.input-month,
+    &.input-year {
+      text-align: center;
+    }
+  }
+
+  &__form-radio {
+    width: 100%;
+    // background-color: var(--main-area-bg);
+    background-color: transparent;
+    // border: 1px solid var(--input-bg);
+
+    border-radius: 4px;
+    color: var(--main-color);
+    font-size: 13px;
+    font-weight: 500;
+    height: 36px;
+    line-height: 1;
+    overflow: hidden;
+    transition: all 250ms ease-in-out;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  &__form-radio-inp {
+    &:checked + .billings__form-label::before {
+      border: 5px solid #1a8cff;
+    }
+  }
+  &__card-expiration-container {
+    display: flex;
+    gap: 15px;
+
+    position: relative;
+    &::before {
+      content: "/";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  &__form-select-wrapper {
+    flex-basis: 60%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    // overflow: hidden;
+
+    cursor: pointer;
+
+    background-color: var(--main-area-bg); // as all form
+    border: 1px solid var(--input-bg);
+
+    border-radius: 4px;
+    height: 36px;
+
+    transition: all 250ms ease-in-out;
+
+    position: relative;
+
+    &:hover {
+      border: 1px solid var(--focus-input-border-color);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .select-arrow-pointer {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      display: block;
+      pointer-events: none;
+      i {
+        display: block;
+        font-size: 8px;
+        line-height: 1;
+      }
+    }
+  }
+  &__form-select-btn {
+    height: 100%;
+    width: 100%;
+    padding: 0 12px;
+    background-color: transparent !important;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    text-align: left;
+    color: var(--main-color);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    &:hover,
+    &:focus {
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  &__payment-method-wrapper {
+    margin-bottom: 20px;
+  }
+
+  // plan cards
+
+  &__plan-card {
+    align-items: stretch;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    .plan-features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+    .plan-features-item {
+      padding: 0;
+      margin: 0;
+
+      font-size: 14px;
+      line-height: 1;
+
+      display: flex;
+      align-items: center;
+
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+
+      span {
+        margin-left: 5px;
+      }
+      i {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--info-bg);
+      }
+    }
+  }
+
+  &__plan-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  &__plan-desc {
+    width: 100%;
+    max-width: 250px;
+    flex-grow: 0;
+    color: var(--secondary-color);
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  &__plan-price {
+    margin: 20px 0;
+  }
+
+  &__plan-numbers {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__plan-info {
+    margin-left: 45px;
+  }
+
+  &__plan-numbers-icon {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    &--small {
+      font-size: 12px;
+      font-weight: 400;
+      padding-top: 3px;
+
+      i {
+        color: var(--sidebar-icons-color);
+        margin-left: 4px;
+        cursor: pointer;
+        transition: color 300ms;
+        font-weight: 600;
+        &:hover {
+          color: var(--sidebar-icons-color-hover);
+          .own-tooltip {
+            opacity: 1;
+          }
+        }
+      }
+
+      .additional-unlocks {
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1;
+        display: block;
+        padding-left: 1px; //for letter A in text
+      }
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  &__plan-numbers-total {
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 600;
+    margin: 0 5px;
+  }
+
+  &__plan-numbers-currency {
+    font-size: 14px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+
+    align-self: flex-end;
+  }
+
+  &__plans-period {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  &__plan-additional-unlocks {
+    display: block;
+    line-height: 1;
+    font-size: 32px;
+    font-weight: 600;
+    margin-right: 15px;
+    transform: scale(1.15);
+  }
+}
+.radio-item {
+  height: 100%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  .billings__form-label {
+    margin-bottom: 0;
+    margin-left: 0;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    &::before {
+      display: block;
+      content: "";
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
+      border-radius: 50%;
+      border: 2px solid var(--placeholder-color);
+      // transition: border 400ms;
+      transition: 50ms ease-in-out;
+    }
+  }
+}
+
+.plan-box {
+  padding: 0;
+}
+
+.return-link {
+  color: var(--info-bg);
+
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+
+  cursor: pointer;
+}
+.return-arrow {
+  text-decoration: none;
+  margin: 0;
+  margin-right: 5px;
+  padding: 5px;
+  font-weight: 700;
+  color: var(--sidebar-icons-color);
+  background-color: transparent;
+  cursor: pointer;
+  transition: 250ms;
+  border-radius: 4px;
+
+  i {
+    font-weight: 900;
+    font-size: 24px;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--sidebar-icons-color-hover);
+  }
+}
+// payment history
+.payment-history-icon {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 400;
+  color: inherit;
+  margin-bottom: 15px;
+}
+.tac {
+  text-align: center;
+}
+.edit-info-btn {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+  margin: 0;
+}
+.card-cvv {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding-bottom: 5px;
+  position: relative;
+
+  img {
+    cursor: pointer;
+  }
+  .card-cvv-preview {
+    position: absolute;
+    top: 65%;
+    left: calc(100% + 10px);
+  }
+}
+
+.dropdown-menu {
+  background: var(--dropdown-bg) !important;
+  color: var(--topbar-color);
+
+  .profile-select-item {
+    color: var(--topbar-color);
+    cursor: pointer;
+    height: 28px;
+    line-height: 18px;
+    padding: 5px 20px;
+    font-size: 13px;
+    font-weight: normal;
+
+    display: flex;
+    align-items: center;
+    &:hover {
+      // background: var(--dropdown-item-hover-bg);
+      background: var(--tab-item-bg);
+      color: var(--main-color) !important;
+    }
+    i {
+      margin-right: 10px;
+    }
+    // &::before {
+    //   display: block;
+    //   content: "";
+    //   width: 16px;
+    //   height: 16px;
+    //   margin-right: 10px;
+    //   border-radius: 50%;
+    //   border: 2px solid var(--placeholder-color);
+    //   transition: border 400ms;
+    // }
+    &.activeItem {
+      // &::before {
+      //   border: 5px solid #1a8cff;
+      // }
+    }
+  }
+
+  &.countries-select-menu {
+    width: 101%;
+    max-height: 250px;
+    overflow-y: auto;
+
+    left: 50% !important;
+    transform: translate3d(-50%, 36px, 0px) !important;
+
+    &:hover::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    &::-webkit-scrollbar {
+      width: 10px;
+      background: transparent;
+      border-radius: 0px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 0px;
+      min-height: 50px;
+    }
+  }
+}
+//  =====================
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.plan-toggle {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+
+  input {
+    &:checked + label::after {
+      left: calc(100% - 2px - 16px);
+    }
+  }
+  span {
+  }
+  label {
+    cursor: pointer;
+    display: block;
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: var(--info-bg);
+    margin: 0 8px;
+    padding: 2px;
+    position: relative;
+    &::after {
+      display: block;
+      content: "";
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      background-color: var(--main-color);
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: 300ms;
+    }
+    &:hover::after {
+      // left: calc(100% - 2px - 16px);
+      // right: 0;
+    }
+  }
+}

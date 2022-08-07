@@ -1,0 +1,179 @@
+.inv-tabs-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: $bg-dark1;
+}
+.inv-tab {
+  overflow: hidden;
+  background-color: $bg-dark1;
+  height: 36px;
+  line-height: 36px;
+  position: relative;
+  padding-left: 20px;
+  #closeLeftSideBtn {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    height: 36px;
+    width: 36px;
+    background: transparent;
+    padding: 0 5px;
+    border-radius: 0;
+    line-height: 36px;
+    color: $color1;
+    transition: 0.5s;
+    &:hover {
+      background: $bg-dark4;
+    }
+  }
+}
+
+/* Style the buttons inside the tab */
+.inv-tab .inv-tablinks {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: $color2;
+  margin-top: 3px;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -17px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    padding: 15px;
+    border-radius: 50%;
+    border: 20px solid $bg-dark2 !important;
+    z-index: 2;
+    transition: all 300ms;
+    opacity: 0;
+    visibility: hidden;
+  }
+  &::before {
+    right: 29px;
+    clip-path: inset(50% 28% 28% 50%);
+  }
+  &::after {
+    left: 29px;
+    clip-path: inset(50% 50% 28% 28%);
+  }
+}
+
+/* Change background color of buttons on hover */
+.inv-tab .inv-tablinks:hover {
+  color: #ffffff;
+  border-radius: 5px 5px 0 0;
+}
+
+/* Style the tab content */
+.inv-tabcontent {
+  display: none;
+  padding: 6px 0px;
+  border-top: none;
+  width: 100%;
+  height: calc(100vh - 56px);
+  background: $bg-dark2;
+  position: relative;
+  border-radius: 6px 0 0 0;
+}
+.inv-activetabcontent {
+  display: block;
+}
+
+#leftSideMenu {
+  height: calc(100vh - 56px);
+  overflow-y: scroll;
+  &:hover::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    border-radius: 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+  }
+}
+.inv-left-side-detailes-container .inv-left-side-tab-content {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  position: absolute;
+  overflow-y: scroll;
+  padding-top: 0px;
+  &:hover::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  &::-webkit-scrollbar {
+    width: 7px;
+    background: transparent;
+    border-radius: 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+  }
+
+  li {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #000;
+  }
+}
+
+.toggle-leftbox-btn {
+  background: $bg-dark2 !important;
+  top: 42px;
+  left: 0;
+  position: fixed;
+  width: 34px;
+}
+
+/*
+.left-side-detailes-container {
+  max-height: calc(100vh - 36px);
+  min-height: calc(100vh - 36px);
+  background: transparent;
+  position: relative;
+  padding-top: 36px;
+  .left-side-tab-content {
+    max-height: calc(100vh - 92px);
+    background: transparent;
+    overflow-y: scroll;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 20px;
+    width: 100%;
+    position: absolute;
+  }
+}*/
+
+.inv-tab .inv-tabsideLeft-active {
+  background: $bg-dark2 !important;
+  border-radius: 5px 5px 0 0;
+
+  transition: all 300ms;
+
+  &::before,
+  &::after {
+    opacity: 1;
+    visibility: visible;
+  }
+}

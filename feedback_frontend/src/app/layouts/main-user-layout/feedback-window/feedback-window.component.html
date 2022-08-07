@@ -1,0 +1,96 @@
+<div class="pw__wrapper" style="z-index: 20 !important;" [ngClass]="{'is-visible': popupsService.visibleFeedbackWindow}">
+    <div class="pw__left-side">
+        <div class="pw__left-side-content" [ngClass]="{'is-visible': popupsService.visibleFeedbackWindow}">
+            <h2 class="pw__title">Feedback</h2>
+            <ul class="pw__nav-list">
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="openFeedbackTab('bugs & errors')"
+                        [ngClass]="{'activeLink': popupsService.activeFeedbackTab === 'bugs & errors'}">
+                        <!-- <svg height="15" width="15">
+                            <use href="assets/img/sprite.svg#bug"></use>
+                        </svg> -->
+                        Bugs & Errors
+                    </a>
+                </li>
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="openFeedbackTab('feature requests')"
+                        [ngClass]="{'activeLink': popupsService.activeFeedbackTab === 'feature requests'}">
+                        <!-- <svg height="15" width="15">
+                            <use href="assets/img/sprite.svg#plus"></use>
+                        </svg> -->
+                        Feature Requests
+                    </a>
+                </li>
+                <li class="pw__nav-item">
+                    <a class="pw__nav-link" (click)="openFeedbackTab('questions')"
+                        [ngClass]="{'activeLink': popupsService.activeFeedbackTab === 'questions'}">
+                        <!-- <svg height="15" width="15">
+                            <use href="assets/img/sprite.svg#question"></use>
+                        </svg> -->
+                        Questions
+                    </a>
+                </li>
+            </ul>
+
+            <div class="pw__divider"></div>
+
+            <div class="fb-form__wrapper">
+
+                <h3 class="pw__title">{{popupsService.feedbackFormTitle}}</h3>
+                <form class="fb-form"  (ngSubmit)="onSubmitPost()">
+
+                    <div class="fb-form__field">
+                        <label for="title" class="fb-form__label">Title</label>
+                        <input class="fb-form__input" [ngClass]="{'error-border': errPostTitle}"  type="text" name="title" id = "title" id="fb-form-bugs-title"
+                            placeholder="Short, descriptive title" value = "" [(ngModel)]="postTitle" 
+                            (input)="onPostTitleChange($event)">
+                        <span class = 'error-letter' *ngIf="errPostTitle">{{errTitleLetter}}</span>
+                        <span class = 'note-letter-num' *ngIf="!errPostTitle" [innerHTML]="safehtmlTitle"></span>
+                    </div>
+
+                    <div class="fb-form__field">
+                        <label for="details" class="fb-form__label">Details</label>
+                        <textarea class="fb-form__textarea" name="details" id="fb-form-bugs-message"
+                            placeholder="Any additional details..." for = "details" [(ngModel)]="postContent" value = "" [ngClass]="{'error-border': errPostContent}" (input)="onPostContentChange($event)"></textarea>
+                        <span class = 'error-letter' *ngIf="errPostContent">{{errContentLetter}}</span>
+                        <span class = 'note-letter-num' *ngIf="!errPostContent" [innerHTML]="safehtmlContent"></span>
+                    </div>
+
+                    <div class="flex-row">
+                        <img *ngFor='let preview of myFilesPreview' [src]="preview" width="80px" style="margin: 3px;">
+                    </div>
+                    <div class="fb-form__field flex-row">
+                        <div class="fb-form__add-image">
+                            <input type="file" name="file" (change)="onFileChange($event)" id="file" hidden="hidden" multiple>
+                            <label for="file">
+                                <i class="bi bi-image"></i>
+                            </label>
+                        </div>
+                        <button class="fb-form__button--accent">
+                            <span *ngIf="submitType === 'create'">Create post</span>
+                            <span *ngIf="submitType === 'update'">Update post</span>
+                        </button>
+                    </div>
+                    <div class="flex-row">
+                        <span *ngIf="errImageSize" class = 'error-letter'>The size is greater than 1MB.</span> 
+                        <span *ngFor="let name of myfileName" class = "font-S12">{{name + ', '}}</span>
+                    </div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="pw__right-side">
+        <div class="pw__right-side-content" [ngClass]="{'is-visible': popupsService.visibleFeedbackWindow}">
+            <h2 class="pw__subtitle">{{popupsService.activeFeedbackTab}}</h2>
+            <app-bugs
+                (update)="onUpdate($event)"
+            ></app-bugs>
+        </div>
+        <button class="pw__close-btn" [ngClass]="{'is-visible': popupsService.visibleFeedbackWindow}"
+            (click)="popupsService.visibleFeedbackWindow = false">
+            <svg width="18" height="18">
+                <use href="assets/img/sprite.svg#close-cross"></use>
+            </svg>
+        </button>
+    </div>
+</div>

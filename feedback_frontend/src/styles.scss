@@ -1,0 +1,243 @@
+//@use "~igniteui-angular/theming" as *;
+// Uncomment the following lines if you want to add a custom palette:
+// $primary: #731963 !default;
+// $secondary: #ce5712 !default;
+// $app-palette: palette($primary, $secondary);
+
+/* autoprefixer grid: on */
+
+//@include core();
+//@include typography($font-family: $material-typeface, $type-scale: $material-type-scale);
+//@include theme($default-palette);
+// CSS Reset, comment out if not required or using a different module
+//@import '~minireset.css/minireset';
+/* You can add global styles to this file, and also import other style files */
+$body-bg-color: #f1f2f4 !important;
+$main-bg: #051e34 !important;
+$bg-white: #fff !important;
+$title-color: #24292f !important;
+
+$bg-dark0: #000000;
+$bg-dark1: #060606;
+$bg-dark2: #161616;
+$bg-dark3: #202020;
+$bg-dark4: #363636;
+$bg-dark5: #464646;
+
+$bg-border: #333333;
+
+$color1: #dcddde;
+$color2: #979796;
+
+@import url("~bootstrap-icons/font/bootstrap-icons.css");
+
+// own iconic font
+@import "assets/iconsfont/iconsfont";
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
+
+@import url("assets/scss/colors.scss");
+@import url("assets/scss/styles-components.scss");
+@import url("assets/scss/utilities.scss");
+@import url("assets/scss/buttons.scss");
+@import url("assets/scss/logo-svg.scss");
+
+// Register and Login Forms Styles
+@import "assets/scss/login-register-forms-styles";
+
+// home page font-family
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+// own tooltip
+@import "assets/scss/own-tooltip";
+
+// global styles for popup windows
+@import "assets/scss/global-popup-styles";
+@import "assets/scss/popup-window-styles";
+
+// feedback area content styles
+@import "assets/scss/feedback-styles";
+
+// profile area content styles
+@import "assets/scss/profile-styles";
+
+*,
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+.title-color {
+  color: $title-color;
+}
+.hover:hover {
+  border: 1px solid $main-bg;
+  transition: 1s;
+}
+
+.active-nav-link {
+  border-bottom: 4px solid #ffee00 !important;
+  font-weight: 600 !important;
+}
+
+button {
+  cursor: pointer !important;
+}
+
+.nowrap-text {
+  white-space: nowrap !important;
+}
+
+/*p {
+  font-family: "Neue Montreal", "Helvetica Neue","Helvetica","Arial","sans-serif","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}*/
+
+.delete-btn-danger {
+  border-radius: 2px !important;
+  background-color: #ff3333 !important;
+  color: #fff !important;
+  transition: 0.4s;
+  border: 1px solid #ff3333 !important;
+  &:hover {
+    background-color: #d40000 !important;
+    border: 1px solid #d40000 !important;
+  }
+}
+
+.delete-btn-outline-danger {
+  border-radius: 2px !important;
+  background-color: transparent !important;
+  color: #ff3333 !important;
+  transition: 0.4s;
+  border: 1px solid #ff3333 !important;
+  &:hover {
+    background: #ff3333 !important;
+    color: #fff !important;
+  }
+}
+.cancel-delete-btn-modal {
+  background: $bg-dark5;
+  border-radius: 2px;
+  transition: 0.4s;
+  color: $color1;
+  &:hover {
+    background: $bg-dark3;
+    color: $color1;
+  }
+}
+
+.p-tooltip {
+  position: absolute !important;
+  /*div:nth-child(1) {
+    border-right-color: red !important;
+  }*/
+  div:nth-child(2) {
+    color: #fff !important;
+    height: 22px;
+    line-height: 20px;
+    font-size: 12px;
+    padding: 0 8px !important;
+    border-radius: 1px !important;
+    border: 1px solid var(--dropdown-border);
+    background-color: var(--dropdown-bg);
+  }
+  // .p-tooltip-arrow {
+  //   border-color: blue;
+  // }
+}
+
+.bootstrap-tooltip-class {
+  &.show {
+    opacity: 1;
+  }
+  .tooltip-inner {
+    background-color: var(--dropdown-bg);
+    width: max-content;
+
+    border: 1px solid var(--dropdown-border);
+
+    padding: 4px;
+
+    color: var(--topbar-color);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+  }
+  &.bs-tooltip-end .tooltip-arrow::before {
+    border-right-color: var(--dropdown-border);
+  }
+  &.bs-tooltip-start .tooltip-arrow::before {
+    border-left-color: var(--dropdown-border);
+  }
+  &.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: var(--dropdown-border);
+  }
+  &.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: var(--dropdown-border);
+  }
+}
+
+.p-overlaypanel {
+  padding: 0 !important;
+  background: #555 !important;
+  .content {
+    background: blue !important;
+  }
+  &::after,
+  &::before {
+    border-bottom-color: var(--tabs-bar-bg) !important;
+  }
+  .p-overlaypanel-content {
+    .content {
+      background: blue !important;
+    }
+  }
+}
+
+.form-input {
+  background-color: var(--main-area-bg);
+  border: 1px solid var(--input-bg);
+  border-radius: 4px;
+  color: var(--main-color);
+  font-size: 13px;
+  font-weight: 500;
+  height: 36px;
+  line-height: 1;
+  overflow: hidden;
+  padding: 0 12px;
+  transition: all 250ms ease-in-out;
+  &:hover {
+    border: 1px solid var(--focus-input-border-color);
+    cursor: pointer;
+    outline: none;
+  }
+  &:focus {
+    border: 1px solid var(--focus-input-border-color);
+    outline: none;
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+.email-verified-tooltip .tooltip-inner {
+  background-color: var(--left-sidebar-bg);
+  font-size: 14px;
+  color: var(--main-color);
+  opacity: 1 !important;
+}
+.email-verified-tooltip.bs-tooltip-end .tooltip-arrow::before {
+  border-right-color: var(--left-sidebar-bg);
+}
+.email-verified-tooltip.bs-tooltip-start .tooltip-arrow::before {
+  border-left-color: var(--left-sidebar-bg);
+}
+.email-verified-tooltip.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: var(--left-sidebar-bg);
+}
+.email-verified-tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: var(--left-sidebar-bg);
+}
